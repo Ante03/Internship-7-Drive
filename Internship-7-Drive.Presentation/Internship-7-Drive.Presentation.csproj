@@ -21,9 +21,7 @@
 
   <ItemGroup>
     <Folder Include="Abstractions\" />
-    <Folder Include="Actions\" />
     <Folder Include="Extensions\" />
-    <Folder Include="Factories\" />
   </ItemGroup>
 
 </Project>

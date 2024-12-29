@@ -3,13 +3,6 @@ using Internship_7_Drive.Data.Entities.Models;
 using Internship_7_Drive.Data.Seeds;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
-using Microsoft.Extensions.Configuration;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 
 namespace Internship_7_Drive.Data.Entities
 {
