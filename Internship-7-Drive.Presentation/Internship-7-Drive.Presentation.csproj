@@ -19,4 +19,11 @@
     <ProjectReference Include="..\Internship-7-Drive.Domain\Internship-7-Drive.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Abstractions\" />
+    <Folder Include="Actions\" />
+    <Folder Include="Extensions\" />
+    <Folder Include="Factories\" />
+  </ItemGroup>
+
 </Project>
