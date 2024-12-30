@@ -21,7 +21,7 @@ namespace Internship_7_Drive.Data.Entities
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<User>()
-                .HasKey(u => new { u.Id });
+                .HasKey(u => new { u.Email });
 
             modelBuilder.Entity<Folder>()
                 .HasKey(f => new { f.Id });
@@ -29,7 +29,7 @@ namespace Internship_7_Drive.Data.Entities
             modelBuilder.Entity<Folder>()
                 .HasOne(f => f.Owner)
                 .WithMany()
-                .HasForeignKey(f => f.OwnerId);
+                .HasForeignKey(f => f.OwnerMail);
 
             modelBuilder.Entity<Folder>()
                 .HasOne(f => f.ParentFolder)
@@ -46,14 +46,16 @@ namespace Internship_7_Drive.Data.Entities
                 .OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder.Entity<Models.File>()
-                .HasOne(o => o.Owner);
+                .HasOne(o => o.Owner)
+                .WithMany()
+                .HasForeignKey(o => o.OwnerMail);
 
             modelBuilder.Entity<Comments>()
                 .HasKey(c  => new { c.Id });
             modelBuilder.Entity<Comments>()
                 .HasOne(c => c.Owner)
                 .WithMany()
-                .HasForeignKey(mf => mf.OwnerId);
+                .HasForeignKey(mf => mf.OwnerMail);
             modelBuilder.Entity<Comments>()
                 .HasOne(c => c.File)
                 .WithMany()
@@ -64,11 +66,11 @@ namespace Internship_7_Drive.Data.Entities
             modelBuilder.Entity<FileShared>()
                 .HasOne(fs => fs.Owner)
                 .WithMany()
-                .HasForeignKey(fs => fs.OwnerId);
+                .HasForeignKey(fs => fs.OwnerMail);
             modelBuilder.Entity<FileShared>()
                 .HasOne(fs => fs.ShardWithUser)
                 .WithMany()
-                .HasForeignKey(fs => fs.ShardWithUserId);
+                .HasForeignKey(fs => fs.SharedWithUserMail);
             modelBuilder.Entity<FileShared>()
                 .HasOne(fs => fs.File)
                 .WithMany()

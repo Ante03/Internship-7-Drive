@@ -18,24 +18,10 @@ namespace Internship_7_Drive.Presentation.Factories
                 int smallestChoice = 1;
                 int biggestChoice = 3;
                 choiceLoginOrRegistar = Reader.CheckNumberBetweenRange(message, smallestChoice, biggestChoice);
-
-                if (choiceLoginOrRegistar == 2)
-                {
-                    var mail = Writer.EnterMail();
-                    var password = Writer.EnterPassword();
-                    var user = userRepository.GetUserByMailAndPassword(mail, password);
-
-                    if (user != null)
-                    {
-                        Console.WriteLine($"Dobrodošao, {user.FirstName} {user.LastName}!");
-                        UserActions.ShowUserActions(dbContext);
-                    }
-                    else
-                    {
-                        Console.WriteLine("Neispravan korisnik. Pokušajte ponovo za 30 sekundi.");
-                        await Task.Delay(30000);
-                    }
-                }
+                if (choiceLoginOrRegistar == 1)
+                    RegisterUserAction.Register(dbContext);
+                else if (choiceLoginOrRegistar == 2)
+                    await LoginUserAction.Login(dbContext);
             }
         }
     }
