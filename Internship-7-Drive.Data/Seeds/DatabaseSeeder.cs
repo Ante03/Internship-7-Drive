@@ -13,61 +13,46 @@ namespace Internship_7_Drive.Data.Seeds
 
         public static void Seed(ModelBuilder modelBuilder)
         {
-            var users = new List<User>
-            {
-                new User { FirstName = "Ante", LastName = "Antic", Email = "ante@gmail.com", Password = "password1" },
-                new User { FirstName = "Marko", LastName = "Markic", Email = "marko@gmail.com", Password = "password2" },
-                new User { FirstName = "Mate", LastName = "Matic", Email = "mate@gmail.com", Password = "password3" },
-                new User { FirstName = "Marija", LastName = "Maric", Email = "marija@gmail.com", Password = "password4" },
-                new User { FirstName = "Marta", LastName = "Martic", Email = "marta@gmail.com", Password = "password5" },
-            };
+            modelBuilder.Entity<User>().HasData(
+                new User { Id = 1, FirstName = "Ante", LastName = "Antić", Email = "ante.antic@gmail.com", Password = "lozinka1" },
+                new User { Id = 2, FirstName = "Marko", LastName = "Marić", Email = "marko.maric@gmail.com", Password = "lozinka2" },
+                new User { Id = 3, FirstName = "Ivan", LastName = "Ivić", Email = "ivan.ivic@gmail.com", Password = "lozinka3" },
+                new User { Id = 4, FirstName = "Stipe", LastName = "Stipić", Email = "stipe.stipic@gmail.com", Password = "lozinka4" },
+                new User { Id = 5, FirstName = "Luka", LastName = "Lukić", Email = "luka.lukic@gmail.com", Password = "lozinka5" },
+                new User { Id = 6, FirstName = "Karlo", LastName = "Karlić", Email = "karlo.karlic@gmail.com", Password = "lozinka6" },
+                new User { Id = 7, FirstName = "Josip", LastName = "Josić", Email = "josip.josic@gmail.com", Password = "lozinka7" },
+                new User { Id = 8, FirstName = "Mate", LastName = "Matić", Email = "mate.matic@gmail.com", Password = "lozinka8" },
+                new User { Id = 9, FirstName = "Nikola", LastName = "Nikolić", Email = "nikola.nikolic@gmail.com", Password = "lozinka9" },
+                new User { Id = 10, FirstName = "Toni", LastName = "Tonić", Email = "toni.tonic@gmail.com", Password = "lozinka10" }
+            );
 
-            modelBuilder.Entity<User>().HasData(users);
+            modelBuilder.Entity<Folder>().HasData(
+                new Folder { Id = 1, Name = "Dokumenti", OwnerId = 1, CreatedAt = DateTimeOffset.Now, LastChangedAt = DateTimeOffset.Now },
+                new Folder { Id = 2, Name = "Slike", OwnerId = 2, CreatedAt = DateTimeOffset.Now, LastChangedAt = DateTimeOffset.Now },
+                new Folder { Id = 3, Name = "Projekti", OwnerId = 3, CreatedAt = DateTimeOffset.Now, LastChangedAt = DateTimeOffset.Now },
+                new Folder { Id = 4, Name = "Muzika", OwnerId = 4, CreatedAt = DateTimeOffset.Now, LastChangedAt = DateTimeOffset.Now },
+                new Folder { Id = 5, Name = "Video", OwnerId = 5, CreatedAt = DateTimeOffset.Now, LastChangedAt = DateTimeOffset.Now },
+                new Folder { Id = 6, Name = "Arhiva", OwnerId = 6, CreatedAt = DateTimeOffset.Now, LastChangedAt = DateTimeOffset.Now },
+                new Folder { Id = 7, Name = "Backup", OwnerId = 7, CreatedAt = DateTimeOffset.Now, LastChangedAt = DateTimeOffset.Now },
+                new Folder { Id = 8, Name = "Bilješke", OwnerId = 8, CreatedAt = DateTimeOffset.Now, LastChangedAt = DateTimeOffset.Now },
+                new Folder { Id = 9, Name = "Reference", OwnerId = 9, CreatedAt = DateTimeOffset.Now, LastChangedAt = DateTimeOffset.Now },
+                new Folder { Id = 10, Name = "Osobno", OwnerId = 10, CreatedAt = DateTimeOffset.Now, LastChangedAt = DateTimeOffset.Now }
+            );
 
-            var folders = new List<Folder>
-            {
-                new Folder { Id = 1, Name = "Folder1", OwnerMail = "ante@gmail.com", CreatedAt = DateTimeOffset.Now, LastChangedAt = DateTimeOffset.Now },
-                new Folder { Id = 2, Name = "Folder2", OwnerMail = "marko@gmail.com", CreatedAt = DateTimeOffset.Now, LastChangedAt = DateTimeOffset.Now },
-                new Folder { Id = 3, Name = "Folder3", OwnerMail = "mate@gmail.com", CreatedAt = DateTimeOffset.Now, LastChangedAt = DateTimeOffset.Now },
-                new Folder { Id = 4, Name = "Folder4", OwnerMail = "marija@gmail.com", CreatedAt = DateTimeOffset.Now, LastChangedAt = DateTimeOffset.Now },
-                new Folder { Id = 5, Name = "Folder5", OwnerMail = "marta@gmail.com", CreatedAt = DateTimeOffset.Now, LastChangedAt = DateTimeOffset.Now },
-            };
+            modelBuilder.Entity<Entities.Models.File>().HasData(
+                new Entities.Models.File { Id = 1, Name = "file1.txt", Content = "Sadržaj datoteke 1", OwnerId = 1, FolderId = 1, CreatedAt = DateTimeOffset.Now, LastChangedAt = DateTimeOffset.Now },
+                new Entities.Models.File { Id = 2, Name = "file2.txt", Content = "Sadržaj datoteke 2", OwnerId = 2, FolderId = 2, CreatedAt = DateTimeOffset.Now, LastChangedAt = DateTimeOffset.Now }
+            );
 
-            modelBuilder.Entity<Folder>().HasData(folders);
+            modelBuilder.Entity<Comments>().HasData(
+                new Comments { Id = 1, Content = "Komentar 1", CreatedAt = DateTimeOffset.Now, OwnerId = 1, FileId = 1 },
+                new Comments { Id = 2, Content = "Komentar 2", CreatedAt = DateTimeOffset.Now, OwnerId = 2, FileId = 2 }
+            );
 
-            var files = new List<Entities.Models.File>
-            {
-                new Entities.Models.File { Id = 1, Name = "File1", Content = "Content1", OwnerMail = "ante@gmail.com", FolderId = 1, CreatedAt = DateTimeOffset.Now, LastChangedAt = DateTimeOffset.Now },
-                new Entities.Models.File { Id = 2, Name = "File2", Content = "Content2", OwnerMail = "marko@gmail.com", FolderId = 2, CreatedAt = DateTimeOffset.Now, LastChangedAt = DateTimeOffset.Now },
-                new Entities.Models.File { Id = 3, Name = "File3", Content = "Content3", OwnerMail = "mate@gmail.com", FolderId = 3, CreatedAt = DateTimeOffset.Now, LastChangedAt = DateTimeOffset.Now },
-                new Entities.Models.File { Id = 4, Name = "File4", Content = "Content4", OwnerMail = "marija@gmail.com", FolderId = 4, CreatedAt = DateTimeOffset.Now, LastChangedAt = DateTimeOffset.Now },
-                new Entities.Models.File { Id = 5, Name = "File5", Content = "Content5", OwnerMail = "marta@gmail.com", FolderId = 5, CreatedAt = DateTimeOffset.Now, LastChangedAt = DateTimeOffset.Now },
-            };
-
-            modelBuilder.Entity<Entities.Models.File>().HasData(files);
-
-
-            var comments = new List<Comments>
-            {
-                new Comments { Id = 1, Content = "Comment1", CreatedAt = DateTimeOffset.Now, OwnerMail = "ante@gmail.com", FileId = 1 },
-                new Comments { Id = 2, Content = "Comment2", CreatedAt = DateTimeOffset.Now, OwnerMail = "marko@gmail.com", FileId = 2 },
-                new Comments { Id = 3, Content = "Comment3", CreatedAt = DateTimeOffset.Now, OwnerMail = "mate@gmail.com", FileId = 3 },
-                new Comments { Id = 4, Content = "Comment4", CreatedAt = DateTimeOffset.Now, OwnerMail = "marija@gmail.com", FileId = 4 },
-                new Comments { Id = 5, Content = "Comment5", CreatedAt = DateTimeOffset.Now, OwnerMail = "marta@gmail.com", FileId = 5 },
-            };
-
-            modelBuilder.Entity<Comments>().HasData(comments);
-
-            var fileShared = new List<FileShared>
-            {
-                new FileShared { Id = 1, FileId = 1, OwnerMail = "ante@gmail.com", SharedWithUserMail = "marta@gmail.com" },
-                new FileShared { Id = 2, FileId = 2, OwnerMail = "marko@gmail.com", SharedWithUserMail = "ante@gmail.com" },
-                new FileShared { Id = 3, FileId = 3, OwnerMail = "mate@gmail.com", SharedWithUserMail = "marko@gmail.com" },
-                new FileShared { Id = 4, FileId = 4, OwnerMail = "marija@gmail.com", SharedWithUserMail = "mate@gmail.com" },
-                new FileShared { Id = 5, FileId = 5, OwnerMail = "marta@gmail.com", SharedWithUserMail = "marija@gmail.com" },
-            };
-
-            modelBuilder.Entity<FileShared>().HasData(fileShared);
+            modelBuilder.Entity<FileShared>().HasData(
+                new FileShared { Id = 1, FileId = 1, OwnerId = 1, SharedWithUserId = 3 },
+                new FileShared { Id = 2, FileId = 2, OwnerId = 2, SharedWithUserId = 4 }
+            );
         }
     }
 }

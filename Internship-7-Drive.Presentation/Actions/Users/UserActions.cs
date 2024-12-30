@@ -1,12 +1,20 @@
 ﻿
-using Internship_7_Drive.Data.Entities;
-using Internship_7_Drive.Domain.Repositories;
-using Internship_7_Drive.Presentation.Helpers;
-using Internship_7_Drive.Data.Entities.Models;
+using Internship_7_Drive.Presentation.Abstractions;
+
 
 namespace Internship_7_Drive.Presentation.Actions.Users
 {
-    public class UserActions
+    public class UserAction : BaseMenuAction
     {
+        public UserAction(IList<IAction> actions) : base(actions)
+        {
+            Name = "User menu";
+        }
+
+        public override void Open()
+        {
+            Console.WriteLine("Users management");
+            base.Open();
+        }
     }
 }

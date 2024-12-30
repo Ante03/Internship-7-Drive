@@ -1,13 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 namespace Internship_7_Drive.Presentation.Helpers
 {
     public class Reader
     {
+        public static void ReadInput(string message, out string input)
+        {
+            Console.WriteLine(message);
+            input = Console.ReadLine() ?? string.Empty;
+        }
         public static int CheckNumberBetweenRange(string message, int smallestNumber, int biggestNumber)
         {
             var EnteredNumber = -1;

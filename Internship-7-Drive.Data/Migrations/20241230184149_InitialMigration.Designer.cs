@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Internship_7_Drive.Data.Migrations
 {
     [DbContext(typeof(DriveDbContext))]
-    [Migration("20241230124012_InitialMigration")]
+    [Migration("20241230184149_InitialMigration")]
     partial class InitialMigration
     {
         /// <inheritdoc />
@@ -43,9 +43,8 @@ namespace Internship_7_Drive.Data.Migrations
                     b.Property<int>("FileId")
                         .HasColumnType("integer");
 
-                    b.Property<string>("OwnerMail")
-                        .IsRequired()
-                        .HasColumnType("text");
+                    b.Property<int>("OwnerId")
+                        .HasColumnType("integer");
 
                     b.Property<DateTimeOffset?>("UpdatedAt")
                         .HasColumnType("timestamp with time zone");
@@ -54,7 +53,7 @@ namespace Internship_7_Drive.Data.Migrations
 
                     b.HasIndex("FileId");
 
-                    b.HasIndex("OwnerMail");
+                    b.HasIndex("OwnerId");
 
                     b.ToTable("Comments");
 
@@ -62,42 +61,18 @@ namespace Internship_7_Drive.Data.Migrations
                         new
                         {
                             Id = 1,
-                            Content = "Comment1",
-                            CreatedAt = new DateTimeOffset(new DateTime(2024, 12, 30, 13, 40, 11, 718, DateTimeKind.Unspecified).AddTicks(7751), new TimeSpan(0, 1, 0, 0, 0)),
+                            Content = "Komentar 1",
+                            CreatedAt = new DateTimeOffset(new DateTime(2024, 12, 30, 19, 41, 48, 901, DateTimeKind.Unspecified).AddTicks(8501), new TimeSpan(0, 1, 0, 0, 0)),
                             FileId = 1,
-                            OwnerMail = "ante@gmail.com"
+                            OwnerId = 1
                         },
                         new
                         {
                             Id = 2,
-                            Content = "Comment2",
-                            CreatedAt = new DateTimeOffset(new DateTime(2024, 12, 30, 13, 40, 11, 718, DateTimeKind.Unspecified).AddTicks(7760), new TimeSpan(0, 1, 0, 0, 0)),
+                            Content = "Komentar 2",
+                            CreatedAt = new DateTimeOffset(new DateTime(2024, 12, 30, 19, 41, 48, 901, DateTimeKind.Unspecified).AddTicks(8506), new TimeSpan(0, 1, 0, 0, 0)),
                             FileId = 2,
-                            OwnerMail = "marko@gmail.com"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Content = "Comment3",
-                            CreatedAt = new DateTimeOffset(new DateTime(2024, 12, 30, 13, 40, 11, 718, DateTimeKind.Unspecified).AddTicks(7765), new TimeSpan(0, 1, 0, 0, 0)),
-                            FileId = 3,
-                            OwnerMail = "mate@gmail.com"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Content = "Comment4",
-                            CreatedAt = new DateTimeOffset(new DateTime(2024, 12, 30, 13, 40, 11, 718, DateTimeKind.Unspecified).AddTicks(7768), new TimeSpan(0, 1, 0, 0, 0)),
-                            FileId = 4,
-                            OwnerMail = "marija@gmail.com"
-                        },
-                        new
-                        {
-                            Id = 5,
-                            Content = "Comment5",
-                            CreatedAt = new DateTimeOffset(new DateTime(2024, 12, 30, 13, 40, 11, 718, DateTimeKind.Unspecified).AddTicks(7772), new TimeSpan(0, 1, 0, 0, 0)),
-                            FileId = 5,
-                            OwnerMail = "marta@gmail.com"
+                            OwnerId = 2
                         });
                 });
 
@@ -126,15 +101,14 @@ namespace Internship_7_Drive.Data.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<string>("OwnerMail")
-                        .IsRequired()
-                        .HasColumnType("text");
+                    b.Property<int>("OwnerId")
+                        .HasColumnType("integer");
 
                     b.HasKey("Id");
 
                     b.HasIndex("FolderId");
 
-                    b.HasIndex("OwnerMail");
+                    b.HasIndex("OwnerId");
 
                     b.ToTable("Files");
 
@@ -142,52 +116,22 @@ namespace Internship_7_Drive.Data.Migrations
                         new
                         {
                             Id = 1,
-                            Content = "Content1",
-                            CreatedAt = new DateTimeOffset(new DateTime(2024, 12, 30, 13, 40, 11, 718, DateTimeKind.Unspecified).AddTicks(7670), new TimeSpan(0, 1, 0, 0, 0)),
+                            Content = "Sadržaj datoteke 1",
+                            CreatedAt = new DateTimeOffset(new DateTime(2024, 12, 30, 19, 41, 48, 901, DateTimeKind.Unspecified).AddTicks(8471), new TimeSpan(0, 1, 0, 0, 0)),
                             FolderId = 1,
-                            LastChangedAt = new DateTimeOffset(new DateTime(2024, 12, 30, 13, 40, 11, 718, DateTimeKind.Unspecified).AddTicks(7674), new TimeSpan(0, 1, 0, 0, 0)),
-                            Name = "File1",
-                            OwnerMail = "ante@gmail.com"
+                            LastChangedAt = new DateTimeOffset(new DateTime(2024, 12, 30, 19, 41, 48, 901, DateTimeKind.Unspecified).AddTicks(8474), new TimeSpan(0, 1, 0, 0, 0)),
+                            Name = "file1.txt",
+                            OwnerId = 1
                         },
                         new
                         {
                             Id = 2,
-                            Content = "Content2",
-                            CreatedAt = new DateTimeOffset(new DateTime(2024, 12, 30, 13, 40, 11, 718, DateTimeKind.Unspecified).AddTicks(7682), new TimeSpan(0, 1, 0, 0, 0)),
+                            Content = "Sadržaj datoteke 2",
+                            CreatedAt = new DateTimeOffset(new DateTime(2024, 12, 30, 19, 41, 48, 901, DateTimeKind.Unspecified).AddTicks(8477), new TimeSpan(0, 1, 0, 0, 0)),
                             FolderId = 2,
-                            LastChangedAt = new DateTimeOffset(new DateTime(2024, 12, 30, 13, 40, 11, 718, DateTimeKind.Unspecified).AddTicks(7685), new TimeSpan(0, 1, 0, 0, 0)),
-                            Name = "File2",
-                            OwnerMail = "marko@gmail.com"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Content = "Content3",
-                            CreatedAt = new DateTimeOffset(new DateTime(2024, 12, 30, 13, 40, 11, 718, DateTimeKind.Unspecified).AddTicks(7689), new TimeSpan(0, 1, 0, 0, 0)),
-                            FolderId = 3,
-                            LastChangedAt = new DateTimeOffset(new DateTime(2024, 12, 30, 13, 40, 11, 718, DateTimeKind.Unspecified).AddTicks(7692), new TimeSpan(0, 1, 0, 0, 0)),
-                            Name = "File3",
-                            OwnerMail = "mate@gmail.com"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Content = "Content4",
-                            CreatedAt = new DateTimeOffset(new DateTime(2024, 12, 30, 13, 40, 11, 718, DateTimeKind.Unspecified).AddTicks(7696), new TimeSpan(0, 1, 0, 0, 0)),
-                            FolderId = 4,
-                            LastChangedAt = new DateTimeOffset(new DateTime(2024, 12, 30, 13, 40, 11, 718, DateTimeKind.Unspecified).AddTicks(7698), new TimeSpan(0, 1, 0, 0, 0)),
-                            Name = "File4",
-                            OwnerMail = "marija@gmail.com"
-                        },
-                        new
-                        {
-                            Id = 5,
-                            Content = "Content5",
-                            CreatedAt = new DateTimeOffset(new DateTime(2024, 12, 30, 13, 40, 11, 718, DateTimeKind.Unspecified).AddTicks(7703), new TimeSpan(0, 1, 0, 0, 0)),
-                            FolderId = 5,
-                            LastChangedAt = new DateTimeOffset(new DateTime(2024, 12, 30, 13, 40, 11, 718, DateTimeKind.Unspecified).AddTicks(7705), new TimeSpan(0, 1, 0, 0, 0)),
-                            Name = "File5",
-                            OwnerMail = "marta@gmail.com"
+                            LastChangedAt = new DateTimeOffset(new DateTime(2024, 12, 30, 19, 41, 48, 901, DateTimeKind.Unspecified).AddTicks(8478), new TimeSpan(0, 1, 0, 0, 0)),
+                            Name = "file2.txt",
+                            OwnerId = 2
                         });
                 });
 
@@ -202,21 +146,19 @@ namespace Internship_7_Drive.Data.Migrations
                     b.Property<int>("FileId")
                         .HasColumnType("integer");
 
-                    b.Property<string>("OwnerMail")
-                        .IsRequired()
-                        .HasColumnType("text");
+                    b.Property<int>("OwnerId")
+                        .HasColumnType("integer");
 
-                    b.Property<string>("SharedWithUserMail")
-                        .IsRequired()
-                        .HasColumnType("text");
+                    b.Property<int>("SharedWithUserId")
+                        .HasColumnType("integer");
 
                     b.HasKey("Id");
 
                     b.HasIndex("FileId");
 
-                    b.HasIndex("OwnerMail");
+                    b.HasIndex("OwnerId");
 
-                    b.HasIndex("SharedWithUserMail");
+                    b.HasIndex("SharedWithUserId");
 
                     b.ToTable("FileShareds");
 
@@ -225,36 +167,15 @@ namespace Internship_7_Drive.Data.Migrations
                         {
                             Id = 1,
                             FileId = 1,
-                            OwnerMail = "ante@gmail.com",
-                            SharedWithUserMail = "marta@gmail.com"
+                            OwnerId = 1,
+                            SharedWithUserId = 3
                         },
                         new
                         {
                             Id = 2,
                             FileId = 2,
-                            OwnerMail = "marko@gmail.com",
-                            SharedWithUserMail = "ante@gmail.com"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            FileId = 3,
-                            OwnerMail = "mate@gmail.com",
-                            SharedWithUserMail = "marko@gmail.com"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            FileId = 4,
-                            OwnerMail = "marija@gmail.com",
-                            SharedWithUserMail = "mate@gmail.com"
-                        },
-                        new
-                        {
-                            Id = 5,
-                            FileId = 5,
-                            OwnerMail = "marta@gmail.com",
-                            SharedWithUserMail = "marija@gmail.com"
+                            OwnerId = 2,
+                            SharedWithUserId = 4
                         });
                 });
 
@@ -276,16 +197,15 @@ namespace Internship_7_Drive.Data.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<string>("OwnerMail")
-                        .IsRequired()
-                        .HasColumnType("text");
+                    b.Property<int>("OwnerId")
+                        .HasColumnType("integer");
 
                     b.Property<int?>("ParentFolderId")
                         .HasColumnType("integer");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("OwnerMail");
+                    b.HasIndex("OwnerId");
 
                     b.HasIndex("ParentFolderId");
 
@@ -295,48 +215,95 @@ namespace Internship_7_Drive.Data.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTimeOffset(new DateTime(2024, 12, 30, 13, 40, 11, 718, DateTimeKind.Unspecified).AddTicks(7501), new TimeSpan(0, 1, 0, 0, 0)),
-                            LastChangedAt = new DateTimeOffset(new DateTime(2024, 12, 30, 13, 40, 11, 718, DateTimeKind.Unspecified).AddTicks(7582), new TimeSpan(0, 1, 0, 0, 0)),
-                            Name = "Folder1",
-                            OwnerMail = "ante@gmail.com"
+                            CreatedAt = new DateTimeOffset(new DateTime(2024, 12, 30, 19, 41, 48, 901, DateTimeKind.Unspecified).AddTicks(8336), new TimeSpan(0, 1, 0, 0, 0)),
+                            LastChangedAt = new DateTimeOffset(new DateTime(2024, 12, 30, 19, 41, 48, 901, DateTimeKind.Unspecified).AddTicks(8404), new TimeSpan(0, 1, 0, 0, 0)),
+                            Name = "Dokumenti",
+                            OwnerId = 1
                         },
                         new
                         {
                             Id = 2,
-                            CreatedAt = new DateTimeOffset(new DateTime(2024, 12, 30, 13, 40, 11, 718, DateTimeKind.Unspecified).AddTicks(7591), new TimeSpan(0, 1, 0, 0, 0)),
-                            LastChangedAt = new DateTimeOffset(new DateTime(2024, 12, 30, 13, 40, 11, 718, DateTimeKind.Unspecified).AddTicks(7595), new TimeSpan(0, 1, 0, 0, 0)),
-                            Name = "Folder2",
-                            OwnerMail = "marko@gmail.com"
+                            CreatedAt = new DateTimeOffset(new DateTime(2024, 12, 30, 19, 41, 48, 901, DateTimeKind.Unspecified).AddTicks(8408), new TimeSpan(0, 1, 0, 0, 0)),
+                            LastChangedAt = new DateTimeOffset(new DateTime(2024, 12, 30, 19, 41, 48, 901, DateTimeKind.Unspecified).AddTicks(8409), new TimeSpan(0, 1, 0, 0, 0)),
+                            Name = "Slike",
+                            OwnerId = 2
                         },
                         new
                         {
                             Id = 3,
-                            CreatedAt = new DateTimeOffset(new DateTime(2024, 12, 30, 13, 40, 11, 718, DateTimeKind.Unspecified).AddTicks(7599), new TimeSpan(0, 1, 0, 0, 0)),
-                            LastChangedAt = new DateTimeOffset(new DateTime(2024, 12, 30, 13, 40, 11, 718, DateTimeKind.Unspecified).AddTicks(7602), new TimeSpan(0, 1, 0, 0, 0)),
-                            Name = "Folder3",
-                            OwnerMail = "mate@gmail.com"
+                            CreatedAt = new DateTimeOffset(new DateTime(2024, 12, 30, 19, 41, 48, 901, DateTimeKind.Unspecified).AddTicks(8412), new TimeSpan(0, 1, 0, 0, 0)),
+                            LastChangedAt = new DateTimeOffset(new DateTime(2024, 12, 30, 19, 41, 48, 901, DateTimeKind.Unspecified).AddTicks(8413), new TimeSpan(0, 1, 0, 0, 0)),
+                            Name = "Projekti",
+                            OwnerId = 3
                         },
                         new
                         {
                             Id = 4,
-                            CreatedAt = new DateTimeOffset(new DateTime(2024, 12, 30, 13, 40, 11, 718, DateTimeKind.Unspecified).AddTicks(7606), new TimeSpan(0, 1, 0, 0, 0)),
-                            LastChangedAt = new DateTimeOffset(new DateTime(2024, 12, 30, 13, 40, 11, 718, DateTimeKind.Unspecified).AddTicks(7608), new TimeSpan(0, 1, 0, 0, 0)),
-                            Name = "Folder4",
-                            OwnerMail = "marija@gmail.com"
+                            CreatedAt = new DateTimeOffset(new DateTime(2024, 12, 30, 19, 41, 48, 901, DateTimeKind.Unspecified).AddTicks(8416), new TimeSpan(0, 1, 0, 0, 0)),
+                            LastChangedAt = new DateTimeOffset(new DateTime(2024, 12, 30, 19, 41, 48, 901, DateTimeKind.Unspecified).AddTicks(8417), new TimeSpan(0, 1, 0, 0, 0)),
+                            Name = "Muzika",
+                            OwnerId = 4
                         },
                         new
                         {
                             Id = 5,
-                            CreatedAt = new DateTimeOffset(new DateTime(2024, 12, 30, 13, 40, 11, 718, DateTimeKind.Unspecified).AddTicks(7612), new TimeSpan(0, 1, 0, 0, 0)),
-                            LastChangedAt = new DateTimeOffset(new DateTime(2024, 12, 30, 13, 40, 11, 718, DateTimeKind.Unspecified).AddTicks(7615), new TimeSpan(0, 1, 0, 0, 0)),
-                            Name = "Folder5",
-                            OwnerMail = "marta@gmail.com"
+                            CreatedAt = new DateTimeOffset(new DateTime(2024, 12, 30, 19, 41, 48, 901, DateTimeKind.Unspecified).AddTicks(8419), new TimeSpan(0, 1, 0, 0, 0)),
+                            LastChangedAt = new DateTimeOffset(new DateTime(2024, 12, 30, 19, 41, 48, 901, DateTimeKind.Unspecified).AddTicks(8421), new TimeSpan(0, 1, 0, 0, 0)),
+                            Name = "Video",
+                            OwnerId = 5
+                        },
+                        new
+                        {
+                            Id = 6,
+                            CreatedAt = new DateTimeOffset(new DateTime(2024, 12, 30, 19, 41, 48, 901, DateTimeKind.Unspecified).AddTicks(8423), new TimeSpan(0, 1, 0, 0, 0)),
+                            LastChangedAt = new DateTimeOffset(new DateTime(2024, 12, 30, 19, 41, 48, 901, DateTimeKind.Unspecified).AddTicks(8425), new TimeSpan(0, 1, 0, 0, 0)),
+                            Name = "Arhiva",
+                            OwnerId = 6
+                        },
+                        new
+                        {
+                            Id = 7,
+                            CreatedAt = new DateTimeOffset(new DateTime(2024, 12, 30, 19, 41, 48, 901, DateTimeKind.Unspecified).AddTicks(8427), new TimeSpan(0, 1, 0, 0, 0)),
+                            LastChangedAt = new DateTimeOffset(new DateTime(2024, 12, 30, 19, 41, 48, 901, DateTimeKind.Unspecified).AddTicks(8428), new TimeSpan(0, 1, 0, 0, 0)),
+                            Name = "Backup",
+                            OwnerId = 7
+                        },
+                        new
+                        {
+                            Id = 8,
+                            CreatedAt = new DateTimeOffset(new DateTime(2024, 12, 30, 19, 41, 48, 901, DateTimeKind.Unspecified).AddTicks(8430), new TimeSpan(0, 1, 0, 0, 0)),
+                            LastChangedAt = new DateTimeOffset(new DateTime(2024, 12, 30, 19, 41, 48, 901, DateTimeKind.Unspecified).AddTicks(8432), new TimeSpan(0, 1, 0, 0, 0)),
+                            Name = "Bilješke",
+                            OwnerId = 8
+                        },
+                        new
+                        {
+                            Id = 9,
+                            CreatedAt = new DateTimeOffset(new DateTime(2024, 12, 30, 19, 41, 48, 901, DateTimeKind.Unspecified).AddTicks(8434), new TimeSpan(0, 1, 0, 0, 0)),
+                            LastChangedAt = new DateTimeOffset(new DateTime(2024, 12, 30, 19, 41, 48, 901, DateTimeKind.Unspecified).AddTicks(8435), new TimeSpan(0, 1, 0, 0, 0)),
+                            Name = "Reference",
+                            OwnerId = 9
+                        },
+                        new
+                        {
+                            Id = 10,
+                            CreatedAt = new DateTimeOffset(new DateTime(2024, 12, 30, 19, 41, 48, 901, DateTimeKind.Unspecified).AddTicks(8437), new TimeSpan(0, 1, 0, 0, 0)),
+                            LastChangedAt = new DateTimeOffset(new DateTime(2024, 12, 30, 19, 41, 48, 901, DateTimeKind.Unspecified).AddTicks(8439), new TimeSpan(0, 1, 0, 0, 0)),
+                            Name = "Osobno",
+                            OwnerId = 10
                         });
                 });
 
             modelBuilder.Entity("Internship_7_Drive.Data.Entities.Models.User", b =>
                 {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
                     b.Property<string>("Email")
+                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("FirstName")
@@ -350,45 +317,90 @@ namespace Internship_7_Drive.Data.Migrations
                     b.Property<string>("Password")
                         .HasColumnType("text");
 
-                    b.HasKey("Email");
+                    b.HasKey("Id");
 
                     b.ToTable("Users");
 
                     b.HasData(
                         new
                         {
-                            Email = "ante@gmail.com",
+                            Id = 1,
+                            Email = "ante.antic@gmail.com",
                             FirstName = "Ante",
-                            LastName = "Antic",
-                            Password = "password1"
+                            LastName = "Antić",
+                            Password = "lozinka1"
                         },
                         new
                         {
-                            Email = "marko@gmail.com",
+                            Id = 2,
+                            Email = "marko.maric@gmail.com",
                             FirstName = "Marko",
-                            LastName = "Markic",
-                            Password = "password2"
+                            LastName = "Marić",
+                            Password = "lozinka2"
                         },
                         new
                         {
-                            Email = "mate@gmail.com",
+                            Id = 3,
+                            Email = "ivan.ivic@gmail.com",
+                            FirstName = "Ivan",
+                            LastName = "Ivić",
+                            Password = "lozinka3"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Email = "stipe.stipic@gmail.com",
+                            FirstName = "Stipe",
+                            LastName = "Stipić",
+                            Password = "lozinka4"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Email = "luka.lukic@gmail.com",
+                            FirstName = "Luka",
+                            LastName = "Lukić",
+                            Password = "lozinka5"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Email = "karlo.karlic@gmail.com",
+                            FirstName = "Karlo",
+                            LastName = "Karlić",
+                            Password = "lozinka6"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            Email = "josip.josic@gmail.com",
+                            FirstName = "Josip",
+                            LastName = "Josić",
+                            Password = "lozinka7"
+                        },
+                        new
+                        {
+                            Id = 8,
+                            Email = "mate.matic@gmail.com",
                             FirstName = "Mate",
-                            LastName = "Matic",
-                            Password = "password3"
+                            LastName = "Matić",
+                            Password = "lozinka8"
                         },
                         new
                         {
-                            Email = "marija@gmail.com",
-                            FirstName = "Marija",
-                            LastName = "Maric",
-                            Password = "password4"
+                            Id = 9,
+                            Email = "nikola.nikolic@gmail.com",
+                            FirstName = "Nikola",
+                            LastName = "Nikolić",
+                            Password = "lozinka9"
                         },
                         new
                         {
-                            Email = "marta@gmail.com",
-                            FirstName = "Marta",
-                            LastName = "Martic",
-                            Password = "password5"
+                            Id = 10,
+                            Email = "toni.tonic@gmail.com",
+                            FirstName = "Toni",
+                            LastName = "Tonić",
+                            Password = "lozinka10"
                         });
                 });
 
@@ -402,7 +414,7 @@ namespace Internship_7_Drive.Data.Migrations
 
                     b.HasOne("Internship_7_Drive.Data.Entities.Models.User", "Owner")
                         .WithMany()
-                        .HasForeignKey("OwnerMail")
+                        .HasForeignKey("OwnerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -421,7 +433,7 @@ namespace Internship_7_Drive.Data.Migrations
 
                     b.HasOne("Internship_7_Drive.Data.Entities.Models.User", "Owner")
                         .WithMany()
-                        .HasForeignKey("OwnerMail")
+                        .HasForeignKey("OwnerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -440,13 +452,13 @@ namespace Internship_7_Drive.Data.Migrations
 
                     b.HasOne("Internship_7_Drive.Data.Entities.Models.User", "Owner")
                         .WithMany()
-                        .HasForeignKey("OwnerMail")
+                        .HasForeignKey("OwnerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Internship_7_Drive.Data.Entities.Models.User", "ShardWithUser")
                         .WithMany()
-                        .HasForeignKey("SharedWithUserMail")
+                        .HasForeignKey("SharedWithUserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -461,7 +473,7 @@ namespace Internship_7_Drive.Data.Migrations
                 {
                     b.HasOne("Internship_7_Drive.Data.Entities.Models.User", "Owner")
                         .WithMany()
-                        .HasForeignKey("OwnerMail")
+                        .HasForeignKey("OwnerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

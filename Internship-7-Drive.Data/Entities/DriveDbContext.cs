@@ -21,7 +21,7 @@ namespace Internship_7_Drive.Data.Entities
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<User>()
-                .HasKey(u => new { u.Email });
+                .HasKey(u => new { u.Id });
 
             modelBuilder.Entity<Folder>()
                 .HasKey(f => new { f.Id });
@@ -29,7 +29,7 @@ namespace Internship_7_Drive.Data.Entities
             modelBuilder.Entity<Folder>()
                 .HasOne(f => f.Owner)
                 .WithMany()
-                .HasForeignKey(f => f.OwnerMail);
+                .HasForeignKey(f => f.OwnerId);
 
             modelBuilder.Entity<Folder>()
                 .HasOne(f => f.ParentFolder)
@@ -48,14 +48,14 @@ namespace Internship_7_Drive.Data.Entities
             modelBuilder.Entity<Models.File>()
                 .HasOne(o => o.Owner)
                 .WithMany()
-                .HasForeignKey(o => o.OwnerMail);
+                .HasForeignKey(o => o.OwnerId);
 
             modelBuilder.Entity<Comments>()
                 .HasKey(c  => new { c.Id });
             modelBuilder.Entity<Comments>()
                 .HasOne(c => c.Owner)
                 .WithMany()
-                .HasForeignKey(mf => mf.OwnerMail);
+                .HasForeignKey(mf => mf.OwnerId);
             modelBuilder.Entity<Comments>()
                 .HasOne(c => c.File)
                 .WithMany()
@@ -66,11 +66,11 @@ namespace Internship_7_Drive.Data.Entities
             modelBuilder.Entity<FileShared>()
                 .HasOne(fs => fs.Owner)
                 .WithMany()
-                .HasForeignKey(fs => fs.OwnerMail);
+                .HasForeignKey(fs => fs.OwnerId);
             modelBuilder.Entity<FileShared>()
                 .HasOne(fs => fs.ShardWithUser)
                 .WithMany()
-                .HasForeignKey(fs => fs.SharedWithUserMail);
+                .HasForeignKey(fs => fs.SharedWithUserId);
             modelBuilder.Entity<FileShared>()
                 .HasOne(fs => fs.File)
                 .WithMany()

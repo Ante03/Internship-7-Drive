@@ -23,23 +23,40 @@ namespace Internship_7_Drive.Domain.Repositories
             return ResponseResultType.Success;
         }
 
-        public ResponseResultType Update(string mail, string password, string oldMail)
+        public ResponseResultType UpdateMail(string mail, int id)
         {
-            var userToUpdate = DbContext.Users.Find(oldMail);
+            var userWithSameMail = GetUserByMail(mail);
+            if (userWithSameMail != null)
+                return ResponseResultType.AlreadyExists;
+
+            var userToUpdate = DbContext.Users.Find(id);
             if (userToUpdate is null)
             {
                 return ResponseResultType.NotFound;
             }
 
             userToUpdate.Email = mail;
-            userToUpdate.Password = password;
 
-            return SaveChanges();
+            SaveChanges();
+            return ResponseResultType.Success;
         }
 
-        public User? GetUserByMailAndPassword(string email, string password)
+        public ResponseResultType UpdatePassword(string password, int id)
         {
-            return DbContext.Users.FirstOrDefault(u => u.Email == email && u.Password == password);
+            var userToUpdate = DbContext.Users.Find(id);
+            if (userToUpdate is null)
+            {
+                return ResponseResultType.NotFound;
+            }
+            userToUpdate.Password = password;
+            Console.WriteLine("AAAA");
+            SaveChanges();
+            return ResponseResultType.Success;
+        }
+
+        public User? GetUserByMail(string email)
+        {
+            return DbContext.Users.FirstOrDefault(u => u.Email == email);
         }
     }
 }

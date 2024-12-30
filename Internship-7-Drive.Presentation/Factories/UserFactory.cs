@@ -1,31 +1,26 @@
-﻿using Internship_7_Drive.Data.Entities.Models;
-using Internship_7_Drive.Data.Entities;
+﻿
 using Internship_7_Drive.Domain.Repositories;
-using Internship_7_Drive.Presentation.Helpers;
 using Internship_7_Drive.Presentation.Actions.Users;
+using Internship_7_Drive.Domain.Factories;
+using Internship_7_Drive.Presentation.Abstractions;
+using Internship_7_Drive.Presentation.Actions;
 
-namespace Internship_7_Drive.Presentation.Factories
+
+
+
+namespace Internship_7_Drive.Presentation.Factories;
+public class UserActionsFactory
 {
-    public class UserFactory
+    public static UserAction Create()
     {
-
-        public static void ShowUserActions(DriveDbContext dbContext, User user)
+        var actions = new List<IAction>
         {
-            int choiceLoginOrRegistar = 0;
-            while (choiceLoginOrRegistar != 4)
-            {
-                var message = "Odaberite: \n1 - Moj disk \n2 - Dijeljeno sa mnom \n3 - Postavke profila \n4 - Odjava iz profila";
-                int smallestChoice = 1;
-                int biggestChoice = 4;
-                choiceLoginOrRegistar = Reader.CheckNumberBetweenRange(message, smallestChoice, biggestChoice);
-                if (choiceLoginOrRegistar == 3)
-                    ChangeProfilData.ChangeMailAndPassword(dbContext, user);
-            }
-        }
+            new ChangeProfilData(RepositoryFactory.Create<UserRepository>()),
+            new ExitMenuAction()
+        };
 
-        internal static void ShowUserActions(object dbContext, User user)
-        {
-            throw new NotImplementedException();
-        }
+        var menuAction = new UserAction(actions);
+        return menuAction;
     }
 }
+

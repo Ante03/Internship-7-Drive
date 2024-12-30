@@ -1,30 +1,41 @@
 ﻿using Internship_7_Drive.Presentation.Helpers;
 using Internship_7_Drive.Domain.Repositories;
+using Internship_7_Drive.Presentation.Abstractions;
+using Internship_7_Drive.Presentation.Extensions;
 using Internship_7_Drive.Presentation.Factories;
-using Microsoft.EntityFrameworkCore;
-using Internship_7_Drive.Data.Entities;
 
 namespace Internship_7_Drive.Presentation.Actions.Users
 {
-    public class LoginUserAction
+    public class LoginUserAction : IAction
     {
-        public static async Task Login(DriveDbContext dbContext)
-        {
-            var mail = Writer.EnterMail();
-            var password = Writer.EnterPassword();
-            var userRepository = new UserRepository(dbContext);
-            var user = userRepository.GetUserByMailAndPassword(mail, password);
+        private readonly UserRepository _userRepository;
 
-            if (user != null)
+        public int MenuIndex { get; set; }
+        public string Name { get; set; } = "Log In";
+
+        public LoginUserAction(UserRepository userRepository)
+        {
+            _userRepository = userRepository;
+        }
+
+        public void Open()
+        {
+            var newMail = Writer.EnterMail();
+            var newPassword = Writer.EnterPassword();
+
+            var responseResult = _userRepository.GetUserByMail(newMail);
+            if (responseResult is not null)
             {
-                Console.WriteLine($"Dobrodošao, {user.FirstName} {user.LastName}!");
-                UserFactory.ShowUserActions(dbContext, user);
+                ApplicationState.CurrentUser = responseResult;
+                var userActions = UserActionsFactory.Create();
+                userActions.Open();
             }
             else
             {
-                Console.WriteLine("Neispravan korisnik. Pokušajte ponovo za 30 sekundi.");
-                await Task.Delay(30000);
+                Console.WriteLine("Neuspjesna prijava!");
+                Console.ReadLine();
             }
         }
     }
 }
+

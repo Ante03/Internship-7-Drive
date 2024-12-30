@@ -1,10 +1,13 @@
 ﻿
+using Internship_7_Drive.Data.Entities.Models;
 using System.Text.RegularExpressions;
 
 namespace Internship_7_Drive.Presentation.Helpers
 {
     public class Writer
     {
+        public static void Write(User user)
+           => Console.WriteLine($"{user.FirstName} {user.LastName}");
         public static string EnterMail()
         {
             Console.Write("Unesite mail: ");
@@ -27,7 +30,6 @@ namespace Internship_7_Drive.Presentation.Helpers
             }
             return enteredPassword;
         }
-
         public static string ChangeEmail() 
         {
             string emailPattern = @"^[^@]+@[a-zA-Z]{2,}\.[a-zA-Z]{3,}$";
@@ -35,12 +37,11 @@ namespace Internship_7_Drive.Presentation.Helpers
             var EnternedMail = Console.ReadLine();
             while (!Regex.IsMatch(EnternedMail, emailPattern))
             {
-                Console.WriteLine("Unijeli ste krivo mail ili je mail zauzet vec, pokusajte ponovo (nesto@nesto.nesto): ");
+                Console.WriteLine("Unijeli ste krivo mail, pokusajte ponovo (nesto@nesto.nesto): ");
                 EnternedMail = Console.ReadLine();
             }
             return EnternedMail;
         }
-
         public static string ChangePassword()
         {
             Console.Write("Unesite sifru: ");
