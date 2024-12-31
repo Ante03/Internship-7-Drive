@@ -21,7 +21,7 @@ namespace Internship_7_Drive.Presentation.Actions.Users
 
         public void Open()
         {
-            var currentUser = ApplicationState.CurrentUser;
+            var currentUser = ApplicationStateUser.CurrentUser;
             if (currentUser == null)
             {
                 Console.WriteLine("Nema prijavljenog korisnika.");

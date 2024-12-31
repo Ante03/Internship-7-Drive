@@ -23,17 +23,18 @@ namespace Internship_7_Drive.Presentation.Actions.Users
             var newMail = Writer.EnterMail();
             var newPassword = Writer.EnterPassword();
 
-            var responseResult = _userRepository.GetUserByMail(newMail);
+            var responseResult = _userRepository.GetUserByMailAndPassword(newMail, newPassword);
             if (responseResult is not null)
             {
-                ApplicationState.CurrentUser = responseResult;
+                ApplicationStateUser.CurrentUser = responseResult;
                 var userActions = UserActionsFactory.Create();
                 userActions.Open();
             }
             else
             {
                 Console.WriteLine("Neuspjesna prijava!");
-                Console.ReadLine();
+                Thread.Sleep(30000);
+
             }
         }
     }

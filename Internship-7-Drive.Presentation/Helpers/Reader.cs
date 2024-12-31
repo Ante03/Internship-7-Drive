@@ -79,5 +79,26 @@ namespace Internship_7_Drive.Presentation.Helpers
             }
             return enteredSurname;
         }
+        public static bool CheckYesOrNo()
+        {
+            while (true)
+            {
+                Console.WriteLine("\nJeste sigurni da zelite stvoriti novu mapu ('da' ili 'ne'):");
+                var input = Console.ReadLine()?.Trim().ToLower();
+
+                if (input == "da")
+                {
+                    return true; 
+                }
+                else if (input == "ne")
+                {
+                    return false; 
+                }
+                else
+                {
+                    Console.WriteLine("Neispravan unos. Pokušajte ponovo."); 
+                }
+            }
+        }
     }
 }

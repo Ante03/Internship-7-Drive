@@ -2,9 +2,9 @@
 
 namespace Internship_7_Drive.Presentation.Extensions
 {
-    public static class ApplicationState
+    public static class ApplicationStateFolder
     {
-        public static User? CurrentUser { get; set; }
+        public static Folder? CurrentFolder { get; set; }
     }
 
 }

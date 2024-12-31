@@ -2,6 +2,7 @@
 using Internship_7_Drive.Domain.Enums;
 using Internship_7_Drive.Domain.Repositories;
 using Internship_7_Drive.Presentation.Abstractions;
+using Internship_7_Drive.Presentation.Extensions;
 using Internship_7_Drive.Presentation.Factories;
 using Internship_7_Drive.Presentation.Helpers;
 
@@ -32,6 +33,7 @@ namespace Internship_7_Drive.Presentation.Actions.Users
                 var responseResult = _userRepository.Add(firstName, lastName, newMail, newPassword);
                 if (responseResult is ResponseResultType.Success)
                 {
+                    ApplicationStateUser.CurrentUser = _userRepository.GetUserByMail(newMail);
                     var userActions = UserActionsFactory.Create();
                     userActions.Open();
                 }

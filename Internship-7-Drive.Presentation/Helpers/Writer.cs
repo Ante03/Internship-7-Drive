@@ -58,5 +58,24 @@ namespace Internship_7_Drive.Presentation.Helpers
             }
             return enteredPassword;
         }
+        public static void WriteHelpCommands()
+        {
+            Console.WriteLine("\nDostupne komande:");
+            Console.WriteLine("help - za ispis svih komandi");
+            Console.WriteLine("stvori mapu 'ime mape' - za stvaranje mape");
+            Console.WriteLine("exit - za povratak na prethodni izbornik\n");
+        }
+        public static bool CheckFolderName(string input)
+        {
+            var folderName = input.Substring("stvori mapu".Length).Trim();
+            if (string.IsNullOrWhiteSpace(input))
+                return false;
+            return true;
+        }
+        public static string ReturnFolderName(string input)
+        {
+            var folderName = input.Substring("stvori mapu".Length).Trim();
+            return folderName;
+        }
     }
 }

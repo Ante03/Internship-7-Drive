@@ -54,6 +54,10 @@ namespace Internship_7_Drive.Domain.Repositories
             return ResponseResultType.Success;
         }
 
+        public User? GetUserByMailAndPassword(string email, string password)
+        {
+            return DbContext.Users.FirstOrDefault(u => u.Email == email && u.Password == password);
+        }
         public User? GetUserByMail(string email)
         {
             return DbContext.Users.FirstOrDefault(u => u.Email == email);
