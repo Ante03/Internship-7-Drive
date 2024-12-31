@@ -1,11 +1,6 @@
 ﻿using Internship_7_Drive.Data.Entities;
 using Internship_7_Drive.Data.Entities.Models;
 using Internship_7_Drive.Domain.Enums;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Internship_7_Drive.Domain.Repositories
 {
@@ -36,5 +31,31 @@ namespace Internship_7_Drive.Domain.Repositories
         {
             return DbContext.Folders.Where(f => f.OwnerId == ownerId).ToList();
         }
+
+        public ResponseResultType Delete(string name)
+        {
+            var folderToDelete = GetByName(name);
+            if (folderToDelete is null)
+            {
+                return ResponseResultType.NotFound;
+            }
+
+            DbContext.Folders.Remove(folderToDelete);
+            SaveChanges();
+            return ResponseResultType.Success;
+        }
+
+        public ResponseResultType ChangeName(string oldName, string newName, int userId) 
+        {
+            var currentFolder = GetByName(oldName);
+            if (currentFolder == null)
+            {
+                return ResponseResultType.NotFound;
+            }
+            currentFolder.Name = newName;
+            SaveChanges();
+            return ResponseResultType.Success;
+        }
+
     }
 }

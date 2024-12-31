@@ -63,19 +63,25 @@ namespace Internship_7_Drive.Presentation.Helpers
             Console.WriteLine("\nDostupne komande:");
             Console.WriteLine("help - za ispis svih komandi");
             Console.WriteLine("stvori mapu 'ime mape' - za stvaranje mape");
+            Console.WriteLine("stvori datoteku 'ime mape' - za stvaranje mape");
+            Console.WriteLine("udi u mapu - za ulazak u mapu");
+            Console.WriteLine("izbrisi 'ime mape' - za brisanje mape");
+            Console.WriteLine("izbrisi 'ime datoteke' - za brisanje datoteke");
+            Console.WriteLine("promjeni naziv mape 'ime mape' u 'novo ime mape' - za preimenovanje mape");
+            Console.WriteLine("promjeni naziv datoteke 'ime datoteke' u 'novo ime datoteke' - za preimenovanje datoteke");
             Console.WriteLine("exit - za povratak na prethodni izbornik\n");
         }
-        public static bool CheckFolderName(string input)
+        public static bool CheckNewName(string input, string trim)
         {
-            var folderName = input.Substring("stvori mapu".Length).Trim();
+            var folderName = input.Substring(trim.Length).Trim();
             if (string.IsNullOrWhiteSpace(input))
                 return false;
             return true;
         }
-        public static string ReturnFolderName(string input)
+        public static string ReturnNewName(string checkString, string input)
         {
-            var folderName = input.Substring("stvori mapu".Length).Trim();
-            return folderName;
+            var newName = input.Substring(checkString.Length).Trim();
+            return newName;
         }
     }
 }

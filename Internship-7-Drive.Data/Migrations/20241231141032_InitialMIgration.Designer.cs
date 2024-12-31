@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Internship_7_Drive.Data.Migrations
 {
     [DbContext(typeof(DriveDbContext))]
-    [Migration("20241230184149_InitialMigration")]
-    partial class InitialMigration
+    [Migration("20241231141032_InitialMIgration")]
+    partial class InitialMIgration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -62,7 +62,7 @@ namespace Internship_7_Drive.Data.Migrations
                         {
                             Id = 1,
                             Content = "Komentar 1",
-                            CreatedAt = new DateTimeOffset(new DateTime(2024, 12, 30, 19, 41, 48, 901, DateTimeKind.Unspecified).AddTicks(8501), new TimeSpan(0, 1, 0, 0, 0)),
+                            CreatedAt = new DateTimeOffset(new DateTime(2024, 12, 31, 15, 10, 31, 634, DateTimeKind.Unspecified).AddTicks(8587), new TimeSpan(0, 1, 0, 0, 0)),
                             FileId = 1,
                             OwnerId = 1
                         },
@@ -70,7 +70,7 @@ namespace Internship_7_Drive.Data.Migrations
                         {
                             Id = 2,
                             Content = "Komentar 2",
-                            CreatedAt = new DateTimeOffset(new DateTime(2024, 12, 30, 19, 41, 48, 901, DateTimeKind.Unspecified).AddTicks(8506), new TimeSpan(0, 1, 0, 0, 0)),
+                            CreatedAt = new DateTimeOffset(new DateTime(2024, 12, 31, 15, 10, 31, 634, DateTimeKind.Unspecified).AddTicks(8591), new TimeSpan(0, 1, 0, 0, 0)),
                             FileId = 2,
                             OwnerId = 2
                         });
@@ -117,9 +117,9 @@ namespace Internship_7_Drive.Data.Migrations
                         {
                             Id = 1,
                             Content = "Sadržaj datoteke 1",
-                            CreatedAt = new DateTimeOffset(new DateTime(2024, 12, 30, 19, 41, 48, 901, DateTimeKind.Unspecified).AddTicks(8471), new TimeSpan(0, 1, 0, 0, 0)),
+                            CreatedAt = new DateTimeOffset(new DateTime(2024, 12, 31, 15, 10, 31, 634, DateTimeKind.Unspecified).AddTicks(8552), new TimeSpan(0, 1, 0, 0, 0)),
                             FolderId = 1,
-                            LastChangedAt = new DateTimeOffset(new DateTime(2024, 12, 30, 19, 41, 48, 901, DateTimeKind.Unspecified).AddTicks(8474), new TimeSpan(0, 1, 0, 0, 0)),
+                            LastChangedAt = new DateTimeOffset(new DateTime(2024, 12, 31, 15, 10, 31, 634, DateTimeKind.Unspecified).AddTicks(8555), new TimeSpan(0, 1, 0, 0, 0)),
                             Name = "file1.txt",
                             OwnerId = 1
                         },
@@ -127,9 +127,9 @@ namespace Internship_7_Drive.Data.Migrations
                         {
                             Id = 2,
                             Content = "Sadržaj datoteke 2",
-                            CreatedAt = new DateTimeOffset(new DateTime(2024, 12, 30, 19, 41, 48, 901, DateTimeKind.Unspecified).AddTicks(8477), new TimeSpan(0, 1, 0, 0, 0)),
+                            CreatedAt = new DateTimeOffset(new DateTime(2024, 12, 31, 15, 10, 31, 634, DateTimeKind.Unspecified).AddTicks(8558), new TimeSpan(0, 1, 0, 0, 0)),
                             FolderId = 2,
-                            LastChangedAt = new DateTimeOffset(new DateTime(2024, 12, 30, 19, 41, 48, 901, DateTimeKind.Unspecified).AddTicks(8478), new TimeSpan(0, 1, 0, 0, 0)),
+                            LastChangedAt = new DateTimeOffset(new DateTime(2024, 12, 31, 15, 10, 31, 634, DateTimeKind.Unspecified).AddTicks(8560), new TimeSpan(0, 1, 0, 0, 0)),
                             Name = "file2.txt",
                             OwnerId = 2
                         });
@@ -215,82 +215,126 @@ namespace Internship_7_Drive.Data.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTimeOffset(new DateTime(2024, 12, 30, 19, 41, 48, 901, DateTimeKind.Unspecified).AddTicks(8336), new TimeSpan(0, 1, 0, 0, 0)),
-                            LastChangedAt = new DateTimeOffset(new DateTime(2024, 12, 30, 19, 41, 48, 901, DateTimeKind.Unspecified).AddTicks(8404), new TimeSpan(0, 1, 0, 0, 0)),
+                            CreatedAt = new DateTimeOffset(new DateTime(2024, 12, 31, 15, 10, 31, 634, DateTimeKind.Unspecified).AddTicks(8418), new TimeSpan(0, 1, 0, 0, 0)),
+                            LastChangedAt = new DateTimeOffset(new DateTime(2024, 12, 31, 15, 10, 31, 634, DateTimeKind.Unspecified).AddTicks(8487), new TimeSpan(0, 1, 0, 0, 0)),
                             Name = "Dokumenti",
                             OwnerId = 1
                         },
                         new
                         {
                             Id = 2,
-                            CreatedAt = new DateTimeOffset(new DateTime(2024, 12, 30, 19, 41, 48, 901, DateTimeKind.Unspecified).AddTicks(8408), new TimeSpan(0, 1, 0, 0, 0)),
-                            LastChangedAt = new DateTimeOffset(new DateTime(2024, 12, 30, 19, 41, 48, 901, DateTimeKind.Unspecified).AddTicks(8409), new TimeSpan(0, 1, 0, 0, 0)),
+                            CreatedAt = new DateTimeOffset(new DateTime(2024, 12, 31, 15, 10, 31, 634, DateTimeKind.Unspecified).AddTicks(8492), new TimeSpan(0, 1, 0, 0, 0)),
+                            LastChangedAt = new DateTimeOffset(new DateTime(2024, 12, 31, 15, 10, 31, 634, DateTimeKind.Unspecified).AddTicks(8494), new TimeSpan(0, 1, 0, 0, 0)),
                             Name = "Slike",
                             OwnerId = 2
                         },
                         new
                         {
                             Id = 3,
-                            CreatedAt = new DateTimeOffset(new DateTime(2024, 12, 30, 19, 41, 48, 901, DateTimeKind.Unspecified).AddTicks(8412), new TimeSpan(0, 1, 0, 0, 0)),
-                            LastChangedAt = new DateTimeOffset(new DateTime(2024, 12, 30, 19, 41, 48, 901, DateTimeKind.Unspecified).AddTicks(8413), new TimeSpan(0, 1, 0, 0, 0)),
+                            CreatedAt = new DateTimeOffset(new DateTime(2024, 12, 31, 15, 10, 31, 634, DateTimeKind.Unspecified).AddTicks(8496), new TimeSpan(0, 1, 0, 0, 0)),
+                            LastChangedAt = new DateTimeOffset(new DateTime(2024, 12, 31, 15, 10, 31, 634, DateTimeKind.Unspecified).AddTicks(8497), new TimeSpan(0, 1, 0, 0, 0)),
                             Name = "Projekti",
                             OwnerId = 3
                         },
                         new
                         {
                             Id = 4,
-                            CreatedAt = new DateTimeOffset(new DateTime(2024, 12, 30, 19, 41, 48, 901, DateTimeKind.Unspecified).AddTicks(8416), new TimeSpan(0, 1, 0, 0, 0)),
-                            LastChangedAt = new DateTimeOffset(new DateTime(2024, 12, 30, 19, 41, 48, 901, DateTimeKind.Unspecified).AddTicks(8417), new TimeSpan(0, 1, 0, 0, 0)),
+                            CreatedAt = new DateTimeOffset(new DateTime(2024, 12, 31, 15, 10, 31, 634, DateTimeKind.Unspecified).AddTicks(8499), new TimeSpan(0, 1, 0, 0, 0)),
+                            LastChangedAt = new DateTimeOffset(new DateTime(2024, 12, 31, 15, 10, 31, 634, DateTimeKind.Unspecified).AddTicks(8501), new TimeSpan(0, 1, 0, 0, 0)),
                             Name = "Muzika",
                             OwnerId = 4
                         },
                         new
                         {
                             Id = 5,
-                            CreatedAt = new DateTimeOffset(new DateTime(2024, 12, 30, 19, 41, 48, 901, DateTimeKind.Unspecified).AddTicks(8419), new TimeSpan(0, 1, 0, 0, 0)),
-                            LastChangedAt = new DateTimeOffset(new DateTime(2024, 12, 30, 19, 41, 48, 901, DateTimeKind.Unspecified).AddTicks(8421), new TimeSpan(0, 1, 0, 0, 0)),
+                            CreatedAt = new DateTimeOffset(new DateTime(2024, 12, 31, 15, 10, 31, 634, DateTimeKind.Unspecified).AddTicks(8503), new TimeSpan(0, 1, 0, 0, 0)),
+                            LastChangedAt = new DateTimeOffset(new DateTime(2024, 12, 31, 15, 10, 31, 634, DateTimeKind.Unspecified).AddTicks(8504), new TimeSpan(0, 1, 0, 0, 0)),
                             Name = "Video",
                             OwnerId = 5
                         },
                         new
                         {
                             Id = 6,
-                            CreatedAt = new DateTimeOffset(new DateTime(2024, 12, 30, 19, 41, 48, 901, DateTimeKind.Unspecified).AddTicks(8423), new TimeSpan(0, 1, 0, 0, 0)),
-                            LastChangedAt = new DateTimeOffset(new DateTime(2024, 12, 30, 19, 41, 48, 901, DateTimeKind.Unspecified).AddTicks(8425), new TimeSpan(0, 1, 0, 0, 0)),
+                            CreatedAt = new DateTimeOffset(new DateTime(2024, 12, 31, 15, 10, 31, 634, DateTimeKind.Unspecified).AddTicks(8507), new TimeSpan(0, 1, 0, 0, 0)),
+                            LastChangedAt = new DateTimeOffset(new DateTime(2024, 12, 31, 15, 10, 31, 634, DateTimeKind.Unspecified).AddTicks(8508), new TimeSpan(0, 1, 0, 0, 0)),
                             Name = "Arhiva",
                             OwnerId = 6
                         },
                         new
                         {
                             Id = 7,
-                            CreatedAt = new DateTimeOffset(new DateTime(2024, 12, 30, 19, 41, 48, 901, DateTimeKind.Unspecified).AddTicks(8427), new TimeSpan(0, 1, 0, 0, 0)),
-                            LastChangedAt = new DateTimeOffset(new DateTime(2024, 12, 30, 19, 41, 48, 901, DateTimeKind.Unspecified).AddTicks(8428), new TimeSpan(0, 1, 0, 0, 0)),
+                            CreatedAt = new DateTimeOffset(new DateTime(2024, 12, 31, 15, 10, 31, 634, DateTimeKind.Unspecified).AddTicks(8510), new TimeSpan(0, 1, 0, 0, 0)),
+                            LastChangedAt = new DateTimeOffset(new DateTime(2024, 12, 31, 15, 10, 31, 634, DateTimeKind.Unspecified).AddTicks(8512), new TimeSpan(0, 1, 0, 0, 0)),
                             Name = "Backup",
                             OwnerId = 7
                         },
                         new
                         {
                             Id = 8,
-                            CreatedAt = new DateTimeOffset(new DateTime(2024, 12, 30, 19, 41, 48, 901, DateTimeKind.Unspecified).AddTicks(8430), new TimeSpan(0, 1, 0, 0, 0)),
-                            LastChangedAt = new DateTimeOffset(new DateTime(2024, 12, 30, 19, 41, 48, 901, DateTimeKind.Unspecified).AddTicks(8432), new TimeSpan(0, 1, 0, 0, 0)),
+                            CreatedAt = new DateTimeOffset(new DateTime(2024, 12, 31, 15, 10, 31, 634, DateTimeKind.Unspecified).AddTicks(8514), new TimeSpan(0, 1, 0, 0, 0)),
+                            LastChangedAt = new DateTimeOffset(new DateTime(2024, 12, 31, 15, 10, 31, 634, DateTimeKind.Unspecified).AddTicks(8515), new TimeSpan(0, 1, 0, 0, 0)),
                             Name = "Bilješke",
                             OwnerId = 8
                         },
                         new
                         {
                             Id = 9,
-                            CreatedAt = new DateTimeOffset(new DateTime(2024, 12, 30, 19, 41, 48, 901, DateTimeKind.Unspecified).AddTicks(8434), new TimeSpan(0, 1, 0, 0, 0)),
-                            LastChangedAt = new DateTimeOffset(new DateTime(2024, 12, 30, 19, 41, 48, 901, DateTimeKind.Unspecified).AddTicks(8435), new TimeSpan(0, 1, 0, 0, 0)),
+                            CreatedAt = new DateTimeOffset(new DateTime(2024, 12, 31, 15, 10, 31, 634, DateTimeKind.Unspecified).AddTicks(8517), new TimeSpan(0, 1, 0, 0, 0)),
+                            LastChangedAt = new DateTimeOffset(new DateTime(2024, 12, 31, 15, 10, 31, 634, DateTimeKind.Unspecified).AddTicks(8519), new TimeSpan(0, 1, 0, 0, 0)),
                             Name = "Reference",
                             OwnerId = 9
                         },
                         new
                         {
                             Id = 10,
-                            CreatedAt = new DateTimeOffset(new DateTime(2024, 12, 30, 19, 41, 48, 901, DateTimeKind.Unspecified).AddTicks(8437), new TimeSpan(0, 1, 0, 0, 0)),
-                            LastChangedAt = new DateTimeOffset(new DateTime(2024, 12, 30, 19, 41, 48, 901, DateTimeKind.Unspecified).AddTicks(8439), new TimeSpan(0, 1, 0, 0, 0)),
+                            CreatedAt = new DateTimeOffset(new DateTime(2024, 12, 31, 15, 10, 31, 634, DateTimeKind.Unspecified).AddTicks(8521), new TimeSpan(0, 1, 0, 0, 0)),
+                            LastChangedAt = new DateTimeOffset(new DateTime(2024, 12, 31, 15, 10, 31, 634, DateTimeKind.Unspecified).AddTicks(8522), new TimeSpan(0, 1, 0, 0, 0)),
                             Name = "Osobno",
                             OwnerId = 10
+                        });
+                });
+
+            modelBuilder.Entity("Internship_7_Drive.Data.Entities.Models.FolderShared", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("OwnerId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("ParentFolderId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("SharedWithUserId")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("OwnerId");
+
+                    b.HasIndex("ParentFolderId");
+
+                    b.HasIndex("SharedWithUserId");
+
+                    b.ToTable("FolderShared");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            OwnerId = 1,
+                            ParentFolderId = 1,
+                            SharedWithUserId = 3
+                        },
+                        new
+                        {
+                            Id = 2,
+                            OwnerId = 2,
+                            ParentFolderId = 2,
+                            SharedWithUserId = 4
                         });
                 });
 
@@ -479,11 +523,39 @@ namespace Internship_7_Drive.Data.Migrations
 
                     b.HasOne("Internship_7_Drive.Data.Entities.Models.Folder", "ParentFolder")
                         .WithMany("Subfolders")
-                        .HasForeignKey("ParentFolderId");
+                        .HasForeignKey("ParentFolderId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.Navigation("Owner");
 
                     b.Navigation("ParentFolder");
+                });
+
+            modelBuilder.Entity("Internship_7_Drive.Data.Entities.Models.FolderShared", b =>
+                {
+                    b.HasOne("Internship_7_Drive.Data.Entities.Models.User", "Owner")
+                        .WithMany()
+                        .HasForeignKey("OwnerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Internship_7_Drive.Data.Entities.Models.Folder", "ParentFolder")
+                        .WithMany()
+                        .HasForeignKey("ParentFolderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Internship_7_Drive.Data.Entities.Models.User", "ShardWithUser")
+                        .WithMany()
+                        .HasForeignKey("SharedWithUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Owner");
+
+                    b.Navigation("ParentFolder");
+
+                    b.Navigation("ShardWithUser");
                 });
 
             modelBuilder.Entity("Internship_7_Drive.Data.Entities.Models.Folder", b =>

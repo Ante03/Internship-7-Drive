@@ -9,7 +9,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Internship_7_Drive.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialMigration : Migration
+    public partial class InitialMIgration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -49,7 +49,8 @@ namespace Internship_7_Drive.Data.Migrations
                         name: "FK_Folders_Folders_ParentFolderId",
                         column: x => x.ParentFolderId,
                         principalTable: "Folders",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Folders_Users_OwnerId",
                         column: x => x.OwnerId,
@@ -83,6 +84,39 @@ namespace Internship_7_Drive.Data.Migrations
                     table.ForeignKey(
                         name: "FK_Files_Users_OwnerId",
                         column: x => x.OwnerId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "FolderShared",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    ParentFolderId = table.Column<int>(type: "integer", nullable: false),
+                    OwnerId = table.Column<int>(type: "integer", nullable: false),
+                    SharedWithUserId = table.Column<int>(type: "integer", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_FolderShared", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_FolderShared_Folders_ParentFolderId",
+                        column: x => x.ParentFolderId,
+                        principalTable: "Folders",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_FolderShared_Users_OwnerId",
+                        column: x => x.OwnerId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_FolderShared_Users_SharedWithUserId",
+                        column: x => x.SharedWithUserId,
                         principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -172,16 +206,16 @@ namespace Internship_7_Drive.Data.Migrations
                 columns: new[] { "Id", "CreatedAt", "LastChangedAt", "Name", "OwnerId", "ParentFolderId" },
                 values: new object[,]
                 {
-                    { 1, new DateTimeOffset(new DateTime(2024, 12, 30, 19, 41, 48, 901, DateTimeKind.Unspecified).AddTicks(8336), new TimeSpan(0, 1, 0, 0, 0)), new DateTimeOffset(new DateTime(2024, 12, 30, 19, 41, 48, 901, DateTimeKind.Unspecified).AddTicks(8404), new TimeSpan(0, 1, 0, 0, 0)), "Dokumenti", 1, null },
-                    { 2, new DateTimeOffset(new DateTime(2024, 12, 30, 19, 41, 48, 901, DateTimeKind.Unspecified).AddTicks(8408), new TimeSpan(0, 1, 0, 0, 0)), new DateTimeOffset(new DateTime(2024, 12, 30, 19, 41, 48, 901, DateTimeKind.Unspecified).AddTicks(8409), new TimeSpan(0, 1, 0, 0, 0)), "Slike", 2, null },
-                    { 3, new DateTimeOffset(new DateTime(2024, 12, 30, 19, 41, 48, 901, DateTimeKind.Unspecified).AddTicks(8412), new TimeSpan(0, 1, 0, 0, 0)), new DateTimeOffset(new DateTime(2024, 12, 30, 19, 41, 48, 901, DateTimeKind.Unspecified).AddTicks(8413), new TimeSpan(0, 1, 0, 0, 0)), "Projekti", 3, null },
-                    { 4, new DateTimeOffset(new DateTime(2024, 12, 30, 19, 41, 48, 901, DateTimeKind.Unspecified).AddTicks(8416), new TimeSpan(0, 1, 0, 0, 0)), new DateTimeOffset(new DateTime(2024, 12, 30, 19, 41, 48, 901, DateTimeKind.Unspecified).AddTicks(8417), new TimeSpan(0, 1, 0, 0, 0)), "Muzika", 4, null },
-                    { 5, new DateTimeOffset(new DateTime(2024, 12, 30, 19, 41, 48, 901, DateTimeKind.Unspecified).AddTicks(8419), new TimeSpan(0, 1, 0, 0, 0)), new DateTimeOffset(new DateTime(2024, 12, 30, 19, 41, 48, 901, DateTimeKind.Unspecified).AddTicks(8421), new TimeSpan(0, 1, 0, 0, 0)), "Video", 5, null },
-                    { 6, new DateTimeOffset(new DateTime(2024, 12, 30, 19, 41, 48, 901, DateTimeKind.Unspecified).AddTicks(8423), new TimeSpan(0, 1, 0, 0, 0)), new DateTimeOffset(new DateTime(2024, 12, 30, 19, 41, 48, 901, DateTimeKind.Unspecified).AddTicks(8425), new TimeSpan(0, 1, 0, 0, 0)), "Arhiva", 6, null },
-                    { 7, new DateTimeOffset(new DateTime(2024, 12, 30, 19, 41, 48, 901, DateTimeKind.Unspecified).AddTicks(8427), new TimeSpan(0, 1, 0, 0, 0)), new DateTimeOffset(new DateTime(2024, 12, 30, 19, 41, 48, 901, DateTimeKind.Unspecified).AddTicks(8428), new TimeSpan(0, 1, 0, 0, 0)), "Backup", 7, null },
-                    { 8, new DateTimeOffset(new DateTime(2024, 12, 30, 19, 41, 48, 901, DateTimeKind.Unspecified).AddTicks(8430), new TimeSpan(0, 1, 0, 0, 0)), new DateTimeOffset(new DateTime(2024, 12, 30, 19, 41, 48, 901, DateTimeKind.Unspecified).AddTicks(8432), new TimeSpan(0, 1, 0, 0, 0)), "Bilješke", 8, null },
-                    { 9, new DateTimeOffset(new DateTime(2024, 12, 30, 19, 41, 48, 901, DateTimeKind.Unspecified).AddTicks(8434), new TimeSpan(0, 1, 0, 0, 0)), new DateTimeOffset(new DateTime(2024, 12, 30, 19, 41, 48, 901, DateTimeKind.Unspecified).AddTicks(8435), new TimeSpan(0, 1, 0, 0, 0)), "Reference", 9, null },
-                    { 10, new DateTimeOffset(new DateTime(2024, 12, 30, 19, 41, 48, 901, DateTimeKind.Unspecified).AddTicks(8437), new TimeSpan(0, 1, 0, 0, 0)), new DateTimeOffset(new DateTime(2024, 12, 30, 19, 41, 48, 901, DateTimeKind.Unspecified).AddTicks(8439), new TimeSpan(0, 1, 0, 0, 0)), "Osobno", 10, null }
+                    { 1, new DateTimeOffset(new DateTime(2024, 12, 31, 15, 10, 31, 634, DateTimeKind.Unspecified).AddTicks(8418), new TimeSpan(0, 1, 0, 0, 0)), new DateTimeOffset(new DateTime(2024, 12, 31, 15, 10, 31, 634, DateTimeKind.Unspecified).AddTicks(8487), new TimeSpan(0, 1, 0, 0, 0)), "Dokumenti", 1, null },
+                    { 2, new DateTimeOffset(new DateTime(2024, 12, 31, 15, 10, 31, 634, DateTimeKind.Unspecified).AddTicks(8492), new TimeSpan(0, 1, 0, 0, 0)), new DateTimeOffset(new DateTime(2024, 12, 31, 15, 10, 31, 634, DateTimeKind.Unspecified).AddTicks(8494), new TimeSpan(0, 1, 0, 0, 0)), "Slike", 2, null },
+                    { 3, new DateTimeOffset(new DateTime(2024, 12, 31, 15, 10, 31, 634, DateTimeKind.Unspecified).AddTicks(8496), new TimeSpan(0, 1, 0, 0, 0)), new DateTimeOffset(new DateTime(2024, 12, 31, 15, 10, 31, 634, DateTimeKind.Unspecified).AddTicks(8497), new TimeSpan(0, 1, 0, 0, 0)), "Projekti", 3, null },
+                    { 4, new DateTimeOffset(new DateTime(2024, 12, 31, 15, 10, 31, 634, DateTimeKind.Unspecified).AddTicks(8499), new TimeSpan(0, 1, 0, 0, 0)), new DateTimeOffset(new DateTime(2024, 12, 31, 15, 10, 31, 634, DateTimeKind.Unspecified).AddTicks(8501), new TimeSpan(0, 1, 0, 0, 0)), "Muzika", 4, null },
+                    { 5, new DateTimeOffset(new DateTime(2024, 12, 31, 15, 10, 31, 634, DateTimeKind.Unspecified).AddTicks(8503), new TimeSpan(0, 1, 0, 0, 0)), new DateTimeOffset(new DateTime(2024, 12, 31, 15, 10, 31, 634, DateTimeKind.Unspecified).AddTicks(8504), new TimeSpan(0, 1, 0, 0, 0)), "Video", 5, null },
+                    { 6, new DateTimeOffset(new DateTime(2024, 12, 31, 15, 10, 31, 634, DateTimeKind.Unspecified).AddTicks(8507), new TimeSpan(0, 1, 0, 0, 0)), new DateTimeOffset(new DateTime(2024, 12, 31, 15, 10, 31, 634, DateTimeKind.Unspecified).AddTicks(8508), new TimeSpan(0, 1, 0, 0, 0)), "Arhiva", 6, null },
+                    { 7, new DateTimeOffset(new DateTime(2024, 12, 31, 15, 10, 31, 634, DateTimeKind.Unspecified).AddTicks(8510), new TimeSpan(0, 1, 0, 0, 0)), new DateTimeOffset(new DateTime(2024, 12, 31, 15, 10, 31, 634, DateTimeKind.Unspecified).AddTicks(8512), new TimeSpan(0, 1, 0, 0, 0)), "Backup", 7, null },
+                    { 8, new DateTimeOffset(new DateTime(2024, 12, 31, 15, 10, 31, 634, DateTimeKind.Unspecified).AddTicks(8514), new TimeSpan(0, 1, 0, 0, 0)), new DateTimeOffset(new DateTime(2024, 12, 31, 15, 10, 31, 634, DateTimeKind.Unspecified).AddTicks(8515), new TimeSpan(0, 1, 0, 0, 0)), "Bilješke", 8, null },
+                    { 9, new DateTimeOffset(new DateTime(2024, 12, 31, 15, 10, 31, 634, DateTimeKind.Unspecified).AddTicks(8517), new TimeSpan(0, 1, 0, 0, 0)), new DateTimeOffset(new DateTime(2024, 12, 31, 15, 10, 31, 634, DateTimeKind.Unspecified).AddTicks(8519), new TimeSpan(0, 1, 0, 0, 0)), "Reference", 9, null },
+                    { 10, new DateTimeOffset(new DateTime(2024, 12, 31, 15, 10, 31, 634, DateTimeKind.Unspecified).AddTicks(8521), new TimeSpan(0, 1, 0, 0, 0)), new DateTimeOffset(new DateTime(2024, 12, 31, 15, 10, 31, 634, DateTimeKind.Unspecified).AddTicks(8522), new TimeSpan(0, 1, 0, 0, 0)), "Osobno", 10, null }
                 });
 
             migrationBuilder.InsertData(
@@ -189,8 +223,17 @@ namespace Internship_7_Drive.Data.Migrations
                 columns: new[] { "Id", "Content", "CreatedAt", "FolderId", "LastChangedAt", "Name", "OwnerId" },
                 values: new object[,]
                 {
-                    { 1, "Sadržaj datoteke 1", new DateTimeOffset(new DateTime(2024, 12, 30, 19, 41, 48, 901, DateTimeKind.Unspecified).AddTicks(8471), new TimeSpan(0, 1, 0, 0, 0)), 1, new DateTimeOffset(new DateTime(2024, 12, 30, 19, 41, 48, 901, DateTimeKind.Unspecified).AddTicks(8474), new TimeSpan(0, 1, 0, 0, 0)), "file1.txt", 1 },
-                    { 2, "Sadržaj datoteke 2", new DateTimeOffset(new DateTime(2024, 12, 30, 19, 41, 48, 901, DateTimeKind.Unspecified).AddTicks(8477), new TimeSpan(0, 1, 0, 0, 0)), 2, new DateTimeOffset(new DateTime(2024, 12, 30, 19, 41, 48, 901, DateTimeKind.Unspecified).AddTicks(8478), new TimeSpan(0, 1, 0, 0, 0)), "file2.txt", 2 }
+                    { 1, "Sadržaj datoteke 1", new DateTimeOffset(new DateTime(2024, 12, 31, 15, 10, 31, 634, DateTimeKind.Unspecified).AddTicks(8552), new TimeSpan(0, 1, 0, 0, 0)), 1, new DateTimeOffset(new DateTime(2024, 12, 31, 15, 10, 31, 634, DateTimeKind.Unspecified).AddTicks(8555), new TimeSpan(0, 1, 0, 0, 0)), "file1.txt", 1 },
+                    { 2, "Sadržaj datoteke 2", new DateTimeOffset(new DateTime(2024, 12, 31, 15, 10, 31, 634, DateTimeKind.Unspecified).AddTicks(8558), new TimeSpan(0, 1, 0, 0, 0)), 2, new DateTimeOffset(new DateTime(2024, 12, 31, 15, 10, 31, 634, DateTimeKind.Unspecified).AddTicks(8560), new TimeSpan(0, 1, 0, 0, 0)), "file2.txt", 2 }
+                });
+
+            migrationBuilder.InsertData(
+                table: "FolderShared",
+                columns: new[] { "Id", "OwnerId", "ParentFolderId", "SharedWithUserId" },
+                values: new object[,]
+                {
+                    { 1, 1, 1, 3 },
+                    { 2, 2, 2, 4 }
                 });
 
             migrationBuilder.InsertData(
@@ -198,8 +241,8 @@ namespace Internship_7_Drive.Data.Migrations
                 columns: new[] { "Id", "Content", "CreatedAt", "FileId", "OwnerId", "UpdatedAt" },
                 values: new object[,]
                 {
-                    { 1, "Komentar 1", new DateTimeOffset(new DateTime(2024, 12, 30, 19, 41, 48, 901, DateTimeKind.Unspecified).AddTicks(8501), new TimeSpan(0, 1, 0, 0, 0)), 1, 1, null },
-                    { 2, "Komentar 2", new DateTimeOffset(new DateTime(2024, 12, 30, 19, 41, 48, 901, DateTimeKind.Unspecified).AddTicks(8506), new TimeSpan(0, 1, 0, 0, 0)), 2, 2, null }
+                    { 1, "Komentar 1", new DateTimeOffset(new DateTime(2024, 12, 31, 15, 10, 31, 634, DateTimeKind.Unspecified).AddTicks(8587), new TimeSpan(0, 1, 0, 0, 0)), 1, 1, null },
+                    { 2, "Komentar 2", new DateTimeOffset(new DateTime(2024, 12, 31, 15, 10, 31, 634, DateTimeKind.Unspecified).AddTicks(8591), new TimeSpan(0, 1, 0, 0, 0)), 2, 2, null }
                 });
 
             migrationBuilder.InsertData(
@@ -255,6 +298,21 @@ namespace Internship_7_Drive.Data.Migrations
                 name: "IX_Folders_ParentFolderId",
                 table: "Folders",
                 column: "ParentFolderId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_FolderShared_OwnerId",
+                table: "FolderShared",
+                column: "OwnerId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_FolderShared_ParentFolderId",
+                table: "FolderShared",
+                column: "ParentFolderId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_FolderShared_SharedWithUserId",
+                table: "FolderShared",
+                column: "SharedWithUserId");
         }
 
         /// <inheritdoc />
@@ -265,6 +323,9 @@ namespace Internship_7_Drive.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "FileShareds");
+
+            migrationBuilder.DropTable(
+                name: "FolderShared");
 
             migrationBuilder.DropTable(
                 name: "Files");

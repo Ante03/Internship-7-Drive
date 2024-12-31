@@ -29,12 +29,14 @@ namespace Internship_7_Drive.Data.Entities
             modelBuilder.Entity<Folder>()
                 .HasOne(f => f.Owner)
                 .WithMany()
-                .HasForeignKey(f => f.OwnerId);
+                .HasForeignKey(f => f.OwnerId)
+                .OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder.Entity<Folder>()
                 .HasOne(f => f.ParentFolder)
                 .WithMany(f => f.Subfolders)
-                .HasForeignKey(f => f.ParentFolderId);
+                .HasForeignKey(f => f.ParentFolderId)
+                .OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder.Entity<Models.File>()
                 .HasKey(mf => new { mf.Id });
@@ -48,33 +50,59 @@ namespace Internship_7_Drive.Data.Entities
             modelBuilder.Entity<Models.File>()
                 .HasOne(o => o.Owner)
                 .WithMany()
-                .HasForeignKey(o => o.OwnerId);
+                .HasForeignKey(o => o.OwnerId)
+                .OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder.Entity<Comments>()
                 .HasKey(c  => new { c.Id });
             modelBuilder.Entity<Comments>()
                 .HasOne(c => c.Owner)
                 .WithMany()
-                .HasForeignKey(mf => mf.OwnerId);
+                .HasForeignKey(mf => mf.OwnerId)
+                .OnDelete(DeleteBehavior.Cascade);
             modelBuilder.Entity<Comments>()
                 .HasOne(c => c.File)
                 .WithMany()
-                .HasForeignKey(mf => mf.FileId);
+                .HasForeignKey(mf => mf.FileId)
+                .OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder.Entity<FileShared>()
                 .HasKey(fs => new { fs.Id });
             modelBuilder.Entity<FileShared>()
                 .HasOne(fs => fs.Owner)
                 .WithMany()
-                .HasForeignKey(fs => fs.OwnerId);
+                .HasForeignKey(fs => fs.OwnerId)
+                .OnDelete(DeleteBehavior.Cascade);
+
             modelBuilder.Entity<FileShared>()
                 .HasOne(fs => fs.ShardWithUser)
                 .WithMany()
-                .HasForeignKey(fs => fs.SharedWithUserId);
+                .HasForeignKey(fs => fs.SharedWithUserId)
+                .OnDelete(DeleteBehavior.Cascade);
+
             modelBuilder.Entity<FileShared>()
                 .HasOne(fs => fs.File)
                 .WithMany()
-                .HasForeignKey(fs => fs.FileId);
+                .HasForeignKey(fs => fs.FileId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<FolderShared>()
+                .HasKey(fs => new { fs.Id });
+            modelBuilder.Entity<FolderShared>()
+                .HasOne(fs => fs.Owner)
+                .WithMany()
+                .HasForeignKey(fs => fs.OwnerId)
+                .OnDelete(DeleteBehavior.Cascade);
+            modelBuilder.Entity<FolderShared>()
+                .HasOne(fs => fs.ShardWithUser)
+                .WithMany()
+                .HasForeignKey(fs => fs.SharedWithUserId)
+                .OnDelete(DeleteBehavior.Cascade);
+            modelBuilder.Entity<FolderShared>()
+                .HasOne(fs => fs.ParentFolder)
+                .WithMany()
+                .HasForeignKey(fs => fs.ParentFolderId)
+                .OnDelete(DeleteBehavior.Cascade);
 
             DatabaseSeeder.Seed(modelBuilder);
             base.OnModelCreating(modelBuilder);

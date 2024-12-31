@@ -100,5 +100,16 @@ namespace Internship_7_Drive.Presentation.Helpers
                 }
             }
         }
+        public static string ReturnContent()
+        {
+            Console.Write("Unesite sadrzaj: ");
+            var enteredContent = Console.ReadLine();
+            while (string.IsNullOrWhiteSpace(enteredContent))
+            {
+                Console.Write("Datoteka ne moze biti prazna! Unesite sadrzaj: ");
+                enteredContent = Console.ReadLine();
+            }
+            return enteredContent;
+        }
     }
 }
