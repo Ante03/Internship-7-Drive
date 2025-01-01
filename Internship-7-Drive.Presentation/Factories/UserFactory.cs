@@ -4,7 +4,7 @@ using Internship_7_Drive.Presentation.Actions.Users;
 using Internship_7_Drive.Domain.Factories;
 using Internship_7_Drive.Presentation.Abstractions;
 using Internship_7_Drive.Presentation.Actions;
-using Internship_7_Drive.Presentation.Actions.FoldersAndFiles;
+
 
 
 
@@ -17,10 +17,11 @@ public class UserActionsFactory
         var actions = new List<IAction>
         {
             new ChangeProfilData(RepositoryFactory.Create<UserRepository>()),
-            new PrintFoldersAndFiles(
-                RepositoryFactory.Create<UserRepository>(), 
+            new Actions.FoldersAndFiles.PrintFoldersAndFiles( 
                 RepositoryFactory.Create<FolderRepository>(),
-                RepositoryFactory.Create<FileRepository>()),
+                RepositoryFactory.Create<FileRepository>(),
+                RepositoryFactory.Create<CommentRepository>()
+                ),
             new ExitMenuAction()
         };
 

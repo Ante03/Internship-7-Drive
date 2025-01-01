@@ -69,12 +69,14 @@ namespace Internship_7_Drive.Presentation.Helpers
             Console.WriteLine("izbrisi 'ime datoteke' - za brisanje datoteke");
             Console.WriteLine("promjeni naziv mape 'ime mape' u 'novo ime mape' - za preimenovanje mape");
             Console.WriteLine("promjeni naziv datoteke 'ime datoteke' u 'novo ime datoteke' - za preimenovanje datoteke");
+            Console.WriteLine("uredi datoteku 'ime datoteke' - za uredivanje datoteke");
+            Console.WriteLine("komentari datoteke 'Ime datoteme' - za dodavanje, uredivanje i brisanje koemntara");
             Console.WriteLine("exit - za povratak na prethodni izbornik\n");
         }
         public static bool CheckNewName(string input, string trim)
         {
             var folderName = input.Substring(trim.Length).Trim();
-            if (string.IsNullOrWhiteSpace(input))
+            if (string.IsNullOrWhiteSpace(folderName))
                 return false;
             return true;
         }

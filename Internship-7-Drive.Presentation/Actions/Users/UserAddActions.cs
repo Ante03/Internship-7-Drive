@@ -37,7 +37,8 @@ namespace Internship_7_Drive.Presentation.Actions.Users
                     var userActions = UserActionsFactory.Create();
                     userActions.Open();
                 }
-                Console.WriteLine("Neuspjesna registracija!");
+                else
+                    Console.WriteLine("Neuspjesna registracija!");
             }
         }
     }

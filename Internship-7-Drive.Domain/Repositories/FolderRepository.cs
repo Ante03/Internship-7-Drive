@@ -12,7 +12,7 @@ namespace Internship_7_Drive.Domain.Repositories
 
         public ResponseResultType Add(string name, int ownerId, int? parentFolderId)
         {
-            if (DbContext.Folders.FirstOrDefault(f => f.Name == name) != null)
+            if (DbContext.Folders.FirstOrDefault(f => f.Name == name && f.OwnerId == ownerId) != null)
                 return ResponseResultType.AlreadyExists;
 
             var newFolder = new Folder() { Name = name, OwnerId = ownerId, ParentFolderId = parentFolderId, CreatedAt = DateTimeOffset.UtcNow, LastChangedAt = DateTimeOffset.UtcNow };
@@ -29,16 +29,19 @@ namespace Internship_7_Drive.Domain.Repositories
 
         public List<Folder> GetAllFoldersByOwner(int ownerId)
         {
-            return DbContext.Folders.Where(f => f.OwnerId == ownerId).ToList();
+            return DbContext.Folders
+                .Where(f => f.OwnerId == ownerId)
+                .OrderBy(f => f.Name)
+                .ToList();
         }
 
-        public ResponseResultType Delete(string name)
+        public ResponseResultType Delete(string name, int ownerId)
         {
             var folderToDelete = GetByName(name);
             if (folderToDelete is null)
-            {
                 return ResponseResultType.NotFound;
-            }
+            if (folderToDelete.OwnerId != ownerId)
+                return ResponseResultType.ValidationError;
 
             DbContext.Folders.Remove(folderToDelete);
             SaveChanges();
@@ -49,9 +52,9 @@ namespace Internship_7_Drive.Domain.Repositories
         {
             var currentFolder = GetByName(oldName);
             if (currentFolder == null)
-            {
                 return ResponseResultType.NotFound;
-            }
+            if (currentFolder.OwnerId != userId)
+                return ResponseResultType.ValidationError;
             currentFolder.Name = newName;
             SaveChanges();
             return ResponseResultType.Success;
