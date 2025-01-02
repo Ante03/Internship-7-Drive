@@ -12,7 +12,7 @@ namespace Internship_7_Drive.Presentation.Actions.Users
         private readonly UserRepository _userRepository;
 
         public int MenuIndex { get; set; }
-        public string Name { get; set; } = "Change profil settings";
+        public string Name { get; set; } = "Postavke profila";
 
         public ChangeProfilData(UserRepository userRepository)
         {

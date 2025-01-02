@@ -93,7 +93,6 @@ namespace Internship_7_Drive.Domain.Repositories
                             Console.WriteLine(":help - ispis komandi");
                             Console.WriteLine(":spremi i izlaz - spremanje i izlazak");
                             Console.WriteLine(":izlaz - izlaz bez spremanja");
-                            Console.WriteLine(":otvori komentare - prikazi sve komentare trenutne datoteke");
                             break;
 
                         case ":spremi i izlaz":

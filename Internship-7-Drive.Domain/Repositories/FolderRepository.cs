@@ -48,7 +48,7 @@ namespace Internship_7_Drive.Domain.Repositories
             return ResponseResultType.Success;
         }
 
-        public ResponseResultType ChangeName(string oldName, string newName, int userId) 
+        public ResponseResultType ChangeName(string oldName, string newName, int userId)
         {
             var currentFolder = GetByName(oldName);
             if (currentFolder == null)

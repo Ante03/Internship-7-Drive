@@ -51,13 +51,13 @@ namespace Internship_7_Drive.Data.Seeds
             );
 
             modelBuilder.Entity<FileShared>().HasData(
-                new FileShared { Id = 1, FileId = 1, OwnerId = 1, SharedWithUserId = 3 },
-                new FileShared { Id = 2, FileId = 2, OwnerId = 2, SharedWithUserId = 4 }
+                new FileShared { FileId = 1, OwnerId = 1, SharedWithUserId = 3, ParentFolderId = 1 },
+                new FileShared { FileId = 2, OwnerId = 2, SharedWithUserId = 4, ParentFolderId = 2 }
             );
 
             modelBuilder.Entity<FolderShared>().HasData(
-                new FolderShared { Id = 1, ParentFolderId = 1, OwnerId = 1, SharedWithUserId = 3 },
-                new FolderShared { Id = 2, ParentFolderId = 2, OwnerId = 2, SharedWithUserId = 4 }
+                new FolderShared { FolderId = 1, OwnerId = 1, SharedWithUserId = 2 },
+                new FolderShared { FolderId = 2, OwnerId = 2, SharedWithUserId = 4 }
             );
         }
     }

@@ -106,7 +106,7 @@ namespace Internship_7_Drive.Presentation.Helpers
             var enteredContent = Console.ReadLine();
             while (string.IsNullOrWhiteSpace(enteredContent))
             {
-                Console.Write("Datoteka ne moze biti prazna! Unesite sadrzaj: ");
+                Console.Write("Sadrzaj ne moze biti prazan! Unesite sadrzaj: ");
                 enteredContent = Console.ReadLine();
             }
             return enteredContent;

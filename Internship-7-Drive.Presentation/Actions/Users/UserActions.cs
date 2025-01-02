@@ -13,7 +13,7 @@ namespace Internship_7_Drive.Presentation.Actions.Users
 
         public override void Open()
         {
-            Console.WriteLine("Users management");
+            Console.Clear();
             base.Open();
         }
     }

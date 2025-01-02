@@ -59,7 +59,7 @@ namespace Internship_7_Drive.Data.Migrations
                         {
                             Id = 1,
                             Content = "Komentar 1",
-                            CreatedAt = new DateTimeOffset(new DateTime(2024, 12, 31, 15, 10, 31, 634, DateTimeKind.Unspecified).AddTicks(8587), new TimeSpan(0, 1, 0, 0, 0)),
+                            CreatedAt = new DateTimeOffset(new DateTime(2025, 1, 2, 12, 11, 8, 528, DateTimeKind.Unspecified).AddTicks(4883), new TimeSpan(0, 1, 0, 0, 0)),
                             FileId = 1,
                             OwnerId = 1
                         },
@@ -67,7 +67,7 @@ namespace Internship_7_Drive.Data.Migrations
                         {
                             Id = 2,
                             Content = "Komentar 2",
-                            CreatedAt = new DateTimeOffset(new DateTime(2024, 12, 31, 15, 10, 31, 634, DateTimeKind.Unspecified).AddTicks(8591), new TimeSpan(0, 1, 0, 0, 0)),
+                            CreatedAt = new DateTimeOffset(new DateTime(2025, 1, 2, 12, 11, 8, 528, DateTimeKind.Unspecified).AddTicks(4889), new TimeSpan(0, 1, 0, 0, 0)),
                             FileId = 2,
                             OwnerId = 2
                         });
@@ -114,9 +114,9 @@ namespace Internship_7_Drive.Data.Migrations
                         {
                             Id = 1,
                             Content = "Sadržaj datoteke 1",
-                            CreatedAt = new DateTimeOffset(new DateTime(2024, 12, 31, 15, 10, 31, 634, DateTimeKind.Unspecified).AddTicks(8552), new TimeSpan(0, 1, 0, 0, 0)),
+                            CreatedAt = new DateTimeOffset(new DateTime(2025, 1, 2, 12, 11, 8, 528, DateTimeKind.Unspecified).AddTicks(4779), new TimeSpan(0, 1, 0, 0, 0)),
                             FolderId = 1,
-                            LastChangedAt = new DateTimeOffset(new DateTime(2024, 12, 31, 15, 10, 31, 634, DateTimeKind.Unspecified).AddTicks(8555), new TimeSpan(0, 1, 0, 0, 0)),
+                            LastChangedAt = new DateTimeOffset(new DateTime(2025, 1, 2, 12, 11, 8, 528, DateTimeKind.Unspecified).AddTicks(4820), new TimeSpan(0, 1, 0, 0, 0)),
                             Name = "file1.txt",
                             OwnerId = 1
                         },
@@ -124,9 +124,9 @@ namespace Internship_7_Drive.Data.Migrations
                         {
                             Id = 2,
                             Content = "Sadržaj datoteke 2",
-                            CreatedAt = new DateTimeOffset(new DateTime(2024, 12, 31, 15, 10, 31, 634, DateTimeKind.Unspecified).AddTicks(8558), new TimeSpan(0, 1, 0, 0, 0)),
+                            CreatedAt = new DateTimeOffset(new DateTime(2025, 1, 2, 12, 11, 8, 528, DateTimeKind.Unspecified).AddTicks(4827), new TimeSpan(0, 1, 0, 0, 0)),
                             FolderId = 2,
-                            LastChangedAt = new DateTimeOffset(new DateTime(2024, 12, 31, 15, 10, 31, 634, DateTimeKind.Unspecified).AddTicks(8560), new TimeSpan(0, 1, 0, 0, 0)),
+                            LastChangedAt = new DateTimeOffset(new DateTime(2025, 1, 2, 12, 11, 8, 528, DateTimeKind.Unspecified).AddTicks(4830), new TimeSpan(0, 1, 0, 0, 0)),
                             Name = "file2.txt",
                             OwnerId = 2
                         });
@@ -134,12 +134,6 @@ namespace Internship_7_Drive.Data.Migrations
 
             modelBuilder.Entity("Internship_7_Drive.Data.Entities.Models.FileShared", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
                     b.Property<int>("FileId")
                         .HasColumnType("integer");
 
@@ -149,11 +143,14 @@ namespace Internship_7_Drive.Data.Migrations
                     b.Property<int>("SharedWithUserId")
                         .HasColumnType("integer");
 
-                    b.HasKey("Id");
+                    b.Property<int>("ParentFolderId")
+                        .HasColumnType("integer");
 
-                    b.HasIndex("FileId");
+                    b.HasKey("FileId", "OwnerId", "SharedWithUserId");
 
                     b.HasIndex("OwnerId");
+
+                    b.HasIndex("ParentFolderId");
 
                     b.HasIndex("SharedWithUserId");
 
@@ -162,17 +159,17 @@ namespace Internship_7_Drive.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = 1,
                             FileId = 1,
                             OwnerId = 1,
-                            SharedWithUserId = 3
+                            SharedWithUserId = 3,
+                            ParentFolderId = 1
                         },
                         new
                         {
-                            Id = 2,
                             FileId = 2,
                             OwnerId = 2,
-                            SharedWithUserId = 4
+                            SharedWithUserId = 4,
+                            ParentFolderId = 2
                         });
                 });
 
@@ -212,80 +209,80 @@ namespace Internship_7_Drive.Data.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTimeOffset(new DateTime(2024, 12, 31, 15, 10, 31, 634, DateTimeKind.Unspecified).AddTicks(8418), new TimeSpan(0, 1, 0, 0, 0)),
-                            LastChangedAt = new DateTimeOffset(new DateTime(2024, 12, 31, 15, 10, 31, 634, DateTimeKind.Unspecified).AddTicks(8487), new TimeSpan(0, 1, 0, 0, 0)),
+                            CreatedAt = new DateTimeOffset(new DateTime(2025, 1, 2, 12, 11, 8, 528, DateTimeKind.Unspecified).AddTicks(4296), new TimeSpan(0, 1, 0, 0, 0)),
+                            LastChangedAt = new DateTimeOffset(new DateTime(2025, 1, 2, 12, 11, 8, 528, DateTimeKind.Unspecified).AddTicks(4388), new TimeSpan(0, 1, 0, 0, 0)),
                             Name = "Dokumenti",
                             OwnerId = 1
                         },
                         new
                         {
                             Id = 2,
-                            CreatedAt = new DateTimeOffset(new DateTime(2024, 12, 31, 15, 10, 31, 634, DateTimeKind.Unspecified).AddTicks(8492), new TimeSpan(0, 1, 0, 0, 0)),
-                            LastChangedAt = new DateTimeOffset(new DateTime(2024, 12, 31, 15, 10, 31, 634, DateTimeKind.Unspecified).AddTicks(8494), new TimeSpan(0, 1, 0, 0, 0)),
+                            CreatedAt = new DateTimeOffset(new DateTime(2025, 1, 2, 12, 11, 8, 528, DateTimeKind.Unspecified).AddTicks(4393), new TimeSpan(0, 1, 0, 0, 0)),
+                            LastChangedAt = new DateTimeOffset(new DateTime(2025, 1, 2, 12, 11, 8, 528, DateTimeKind.Unspecified).AddTicks(4396), new TimeSpan(0, 1, 0, 0, 0)),
                             Name = "Slike",
                             OwnerId = 2
                         },
                         new
                         {
                             Id = 3,
-                            CreatedAt = new DateTimeOffset(new DateTime(2024, 12, 31, 15, 10, 31, 634, DateTimeKind.Unspecified).AddTicks(8496), new TimeSpan(0, 1, 0, 0, 0)),
-                            LastChangedAt = new DateTimeOffset(new DateTime(2024, 12, 31, 15, 10, 31, 634, DateTimeKind.Unspecified).AddTicks(8497), new TimeSpan(0, 1, 0, 0, 0)),
+                            CreatedAt = new DateTimeOffset(new DateTime(2025, 1, 2, 12, 11, 8, 528, DateTimeKind.Unspecified).AddTicks(4400), new TimeSpan(0, 1, 0, 0, 0)),
+                            LastChangedAt = new DateTimeOffset(new DateTime(2025, 1, 2, 12, 11, 8, 528, DateTimeKind.Unspecified).AddTicks(4403), new TimeSpan(0, 1, 0, 0, 0)),
                             Name = "Projekti",
                             OwnerId = 3
                         },
                         new
                         {
                             Id = 4,
-                            CreatedAt = new DateTimeOffset(new DateTime(2024, 12, 31, 15, 10, 31, 634, DateTimeKind.Unspecified).AddTicks(8499), new TimeSpan(0, 1, 0, 0, 0)),
-                            LastChangedAt = new DateTimeOffset(new DateTime(2024, 12, 31, 15, 10, 31, 634, DateTimeKind.Unspecified).AddTicks(8501), new TimeSpan(0, 1, 0, 0, 0)),
+                            CreatedAt = new DateTimeOffset(new DateTime(2025, 1, 2, 12, 11, 8, 528, DateTimeKind.Unspecified).AddTicks(4406), new TimeSpan(0, 1, 0, 0, 0)),
+                            LastChangedAt = new DateTimeOffset(new DateTime(2025, 1, 2, 12, 11, 8, 528, DateTimeKind.Unspecified).AddTicks(4408), new TimeSpan(0, 1, 0, 0, 0)),
                             Name = "Muzika",
                             OwnerId = 4
                         },
                         new
                         {
                             Id = 5,
-                            CreatedAt = new DateTimeOffset(new DateTime(2024, 12, 31, 15, 10, 31, 634, DateTimeKind.Unspecified).AddTicks(8503), new TimeSpan(0, 1, 0, 0, 0)),
-                            LastChangedAt = new DateTimeOffset(new DateTime(2024, 12, 31, 15, 10, 31, 634, DateTimeKind.Unspecified).AddTicks(8504), new TimeSpan(0, 1, 0, 0, 0)),
+                            CreatedAt = new DateTimeOffset(new DateTime(2025, 1, 2, 12, 11, 8, 528, DateTimeKind.Unspecified).AddTicks(4412), new TimeSpan(0, 1, 0, 0, 0)),
+                            LastChangedAt = new DateTimeOffset(new DateTime(2025, 1, 2, 12, 11, 8, 528, DateTimeKind.Unspecified).AddTicks(4414), new TimeSpan(0, 1, 0, 0, 0)),
                             Name = "Video",
                             OwnerId = 5
                         },
                         new
                         {
                             Id = 6,
-                            CreatedAt = new DateTimeOffset(new DateTime(2024, 12, 31, 15, 10, 31, 634, DateTimeKind.Unspecified).AddTicks(8507), new TimeSpan(0, 1, 0, 0, 0)),
-                            LastChangedAt = new DateTimeOffset(new DateTime(2024, 12, 31, 15, 10, 31, 634, DateTimeKind.Unspecified).AddTicks(8508), new TimeSpan(0, 1, 0, 0, 0)),
+                            CreatedAt = new DateTimeOffset(new DateTime(2025, 1, 2, 12, 11, 8, 528, DateTimeKind.Unspecified).AddTicks(4417), new TimeSpan(0, 1, 0, 0, 0)),
+                            LastChangedAt = new DateTimeOffset(new DateTime(2025, 1, 2, 12, 11, 8, 528, DateTimeKind.Unspecified).AddTicks(4419), new TimeSpan(0, 1, 0, 0, 0)),
                             Name = "Arhiva",
                             OwnerId = 6
                         },
                         new
                         {
                             Id = 7,
-                            CreatedAt = new DateTimeOffset(new DateTime(2024, 12, 31, 15, 10, 31, 634, DateTimeKind.Unspecified).AddTicks(8510), new TimeSpan(0, 1, 0, 0, 0)),
-                            LastChangedAt = new DateTimeOffset(new DateTime(2024, 12, 31, 15, 10, 31, 634, DateTimeKind.Unspecified).AddTicks(8512), new TimeSpan(0, 1, 0, 0, 0)),
+                            CreatedAt = new DateTimeOffset(new DateTime(2025, 1, 2, 12, 11, 8, 528, DateTimeKind.Unspecified).AddTicks(4422), new TimeSpan(0, 1, 0, 0, 0)),
+                            LastChangedAt = new DateTimeOffset(new DateTime(2025, 1, 2, 12, 11, 8, 528, DateTimeKind.Unspecified).AddTicks(4426), new TimeSpan(0, 1, 0, 0, 0)),
                             Name = "Backup",
                             OwnerId = 7
                         },
                         new
                         {
                             Id = 8,
-                            CreatedAt = new DateTimeOffset(new DateTime(2024, 12, 31, 15, 10, 31, 634, DateTimeKind.Unspecified).AddTicks(8514), new TimeSpan(0, 1, 0, 0, 0)),
-                            LastChangedAt = new DateTimeOffset(new DateTime(2024, 12, 31, 15, 10, 31, 634, DateTimeKind.Unspecified).AddTicks(8515), new TimeSpan(0, 1, 0, 0, 0)),
+                            CreatedAt = new DateTimeOffset(new DateTime(2025, 1, 2, 12, 11, 8, 528, DateTimeKind.Unspecified).AddTicks(4429), new TimeSpan(0, 1, 0, 0, 0)),
+                            LastChangedAt = new DateTimeOffset(new DateTime(2025, 1, 2, 12, 11, 8, 528, DateTimeKind.Unspecified).AddTicks(4432), new TimeSpan(0, 1, 0, 0, 0)),
                             Name = "Bilješke",
                             OwnerId = 8
                         },
                         new
                         {
                             Id = 9,
-                            CreatedAt = new DateTimeOffset(new DateTime(2024, 12, 31, 15, 10, 31, 634, DateTimeKind.Unspecified).AddTicks(8517), new TimeSpan(0, 1, 0, 0, 0)),
-                            LastChangedAt = new DateTimeOffset(new DateTime(2024, 12, 31, 15, 10, 31, 634, DateTimeKind.Unspecified).AddTicks(8519), new TimeSpan(0, 1, 0, 0, 0)),
+                            CreatedAt = new DateTimeOffset(new DateTime(2025, 1, 2, 12, 11, 8, 528, DateTimeKind.Unspecified).AddTicks(4435), new TimeSpan(0, 1, 0, 0, 0)),
+                            LastChangedAt = new DateTimeOffset(new DateTime(2025, 1, 2, 12, 11, 8, 528, DateTimeKind.Unspecified).AddTicks(4438), new TimeSpan(0, 1, 0, 0, 0)),
                             Name = "Reference",
                             OwnerId = 9
                         },
                         new
                         {
                             Id = 10,
-                            CreatedAt = new DateTimeOffset(new DateTime(2024, 12, 31, 15, 10, 31, 634, DateTimeKind.Unspecified).AddTicks(8521), new TimeSpan(0, 1, 0, 0, 0)),
-                            LastChangedAt = new DateTimeOffset(new DateTime(2024, 12, 31, 15, 10, 31, 634, DateTimeKind.Unspecified).AddTicks(8522), new TimeSpan(0, 1, 0, 0, 0)),
+                            CreatedAt = new DateTimeOffset(new DateTime(2025, 1, 2, 12, 11, 8, 528, DateTimeKind.Unspecified).AddTicks(4463), new TimeSpan(0, 1, 0, 0, 0)),
+                            LastChangedAt = new DateTimeOffset(new DateTime(2025, 1, 2, 12, 11, 8, 528, DateTimeKind.Unspecified).AddTicks(4466), new TimeSpan(0, 1, 0, 0, 0)),
                             Name = "Osobno",
                             OwnerId = 10
                         });
@@ -293,45 +290,40 @@ namespace Internship_7_Drive.Data.Migrations
 
             modelBuilder.Entity("Internship_7_Drive.Data.Entities.Models.FolderShared", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
+                    b.Property<int>("SharedWithUserId")
                         .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<int>("OwnerId")
                         .HasColumnType("integer");
 
-                    b.Property<int>("ParentFolderId")
+                    b.Property<int>("FolderId")
                         .HasColumnType("integer");
 
-                    b.Property<int>("SharedWithUserId")
+                    b.Property<int?>("ParentFolderId")
                         .HasColumnType("integer");
 
-                    b.HasKey("Id");
+                    b.HasKey("SharedWithUserId", "OwnerId", "FolderId");
+
+                    b.HasIndex("FolderId");
 
                     b.HasIndex("OwnerId");
 
                     b.HasIndex("ParentFolderId");
 
-                    b.HasIndex("SharedWithUserId");
-
-                    b.ToTable("FolderShared");
+                    b.ToTable("FolderShareds");
 
                     b.HasData(
                         new
                         {
-                            Id = 1,
+                            SharedWithUserId = 2,
                             OwnerId = 1,
-                            ParentFolderId = 1,
-                            SharedWithUserId = 3
+                            FolderId = 1
                         },
                         new
                         {
-                            Id = 2,
+                            SharedWithUserId = 4,
                             OwnerId = 2,
-                            ParentFolderId = 2,
-                            SharedWithUserId = 4
+                            FolderId = 2
                         });
                 });
 
@@ -497,6 +489,12 @@ namespace Internship_7_Drive.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("Internship_7_Drive.Data.Entities.Models.Folder", "ParentFolder")
+                        .WithMany()
+                        .HasForeignKey("ParentFolderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("Internship_7_Drive.Data.Entities.Models.User", "ShardWithUser")
                         .WithMany()
                         .HasForeignKey("SharedWithUserId")
@@ -506,6 +504,8 @@ namespace Internship_7_Drive.Data.Migrations
                     b.Navigation("File");
 
                     b.Navigation("Owner");
+
+                    b.Navigation("ParentFolder");
 
                     b.Navigation("ShardWithUser");
                 });
@@ -530,6 +530,12 @@ namespace Internship_7_Drive.Data.Migrations
 
             modelBuilder.Entity("Internship_7_Drive.Data.Entities.Models.FolderShared", b =>
                 {
+                    b.HasOne("Internship_7_Drive.Data.Entities.Models.Folder", "Folder")
+                        .WithMany()
+                        .HasForeignKey("FolderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("Internship_7_Drive.Data.Entities.Models.User", "Owner")
                         .WithMany()
                         .HasForeignKey("OwnerId")
@@ -539,14 +545,15 @@ namespace Internship_7_Drive.Data.Migrations
                     b.HasOne("Internship_7_Drive.Data.Entities.Models.Folder", "ParentFolder")
                         .WithMany()
                         .HasForeignKey("ParentFolderId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("Internship_7_Drive.Data.Entities.Models.User", "ShardWithUser")
                         .WithMany()
                         .HasForeignKey("SharedWithUserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Folder");
 
                     b.Navigation("Owner");
 

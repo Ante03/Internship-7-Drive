@@ -54,9 +54,8 @@ namespace Internship_7_Drive.Presentation.Actions.FoldersAndFiles
                 inputCommand = Console.ReadLine();
 
                 if (string.IsNullOrEmpty(inputCommand))
-                {
                     continue;
-                }
+
                 if (inputCommand.StartsWith("help", StringComparison.OrdinalIgnoreCase))
                     Writer.WriteHelpCommands();
 
