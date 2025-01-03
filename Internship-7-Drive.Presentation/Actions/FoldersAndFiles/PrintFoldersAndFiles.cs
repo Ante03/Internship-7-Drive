@@ -52,6 +52,7 @@ namespace Internship_7_Drive.Presentation.Actions.FoldersAndFiles
 
                 Console.WriteLine("\nUnesite komandu('help' za ispis svih): ");
                 inputCommand = Console.ReadLine();
+                Console.Clear();
 
                 if (string.IsNullOrEmpty(inputCommand))
                     continue;
@@ -61,8 +62,15 @@ namespace Internship_7_Drive.Presentation.Actions.FoldersAndFiles
 
                 else if (inputCommand.StartsWith("stvori mapu", StringComparison.OrdinalIgnoreCase) && Writer.CheckNewName(inputCommand, "stvori mapu"))
                 {
-                    if (Reader.CheckYesOrNo())
-                        _folderRepository.Add(Writer.ReturnNewName("stvori mapu", inputCommand), currentUser.Id, parentFolderId);
+                    var message = "Jeste li sigurni da zelite stvoriti mapu ('da' ili 'ne')?";
+                    if (Reader.CheckYesOrNo(message))
+                    {
+                        var response = _folderRepository.Add(Writer.ReturnNewName("stvori mapu", inputCommand), currentUser.Id, parentFolderId);
+                        if(response == ResponseResultType.Success)
+                            Console.WriteLine($"Uspjesno stvorena mapa '{Writer.ReturnNewName("stvori mapu", inputCommand)}'.");
+                        else if (response == ResponseResultType.AlreadyExists)
+                            Console.WriteLine($"Vec postoji mapa s imenom '{Writer.ReturnNewName("stvori mapu", inputCommand)}'.");
+                    }  
                     else
                         Console.WriteLine("Odustali od stvaranja nove mape");
                 }
@@ -74,8 +82,9 @@ namespace Internship_7_Drive.Presentation.Actions.FoldersAndFiles
                         Console.WriteLine("Ne mozete napravit datoteku bez da udete u folder!");
                         continue;
                     }
+                    var message = "Jeste li sigurni da zelite stvoriti datoteku ('da' ili 'ne')?";
                     var content = Reader.ReturnContent();
-                    if(Reader.CheckYesOrNo())
+                    if(Reader.CheckYesOrNo(message))
                         _fileRepository.Add(Writer.ReturnNewName("stvori datoteku", inputCommand), content, currentUser.Id, currentFolder.Id);
                     else
                         Console.WriteLine("Odustali od stvaranja datoteke");
@@ -101,8 +110,9 @@ namespace Internship_7_Drive.Presentation.Actions.FoldersAndFiles
 
                 else if (inputCommand.StartsWith("izbrisi mapu", StringComparison.OrdinalIgnoreCase) && Writer.CheckNewName(inputCommand, "izbrisi mapu"))
                 {
+                    var message = "Jeste li sigurni da zelite izbrisati mapu ('da' ili 'ne')?";
                     if (_folderRepository.Delete(Writer.ReturnNewName("izbrisi mapu", inputCommand), currentUser.Id) == ResponseResultType.Success)
-                        if (Reader.CheckYesOrNo())
+                        if (Reader.CheckYesOrNo(message))
                             Console.WriteLine("Uspjesno obrisana mapa!");
                         else 
                             Console.WriteLine("Odustali od brisanja mape");
@@ -113,8 +123,9 @@ namespace Internship_7_Drive.Presentation.Actions.FoldersAndFiles
                 
                 else if (inputCommand.StartsWith("izbrisi datoteku", StringComparison.OrdinalIgnoreCase) && Writer.CheckNewName(inputCommand, "izbrisi datoteku"))
                 {
+                    var message = "Jeste li sigurni da zelite izbrisati datoteku ('da' ili 'ne')?";
                     if (_fileRepository.Delete(Writer.ReturnNewName("izbrisi datoteku", inputCommand), currentUser.Id) == ResponseResultType.Success)
-                        if (Reader.CheckYesOrNo())
+                        if (Reader.CheckYesOrNo(message))
                             Console.WriteLine("Uspjesno obrisana datoteka!");
                         else 
                             Console.WriteLine("Odustali od brisanja datoteke");
@@ -135,9 +146,9 @@ namespace Internship_7_Drive.Presentation.Actions.FoldersAndFiles
                     var newName = parts[3].Trim();
 
                     var result = _folderRepository.ChangeName(currentName, newName, currentUser.Id);
-
+                    var message = "Jeste li sigurni da zelite promjeniti ime mape ('da' ili 'ne')?";
                     if (result == ResponseResultType.Success)
-                        if (Reader.CheckYesOrNo())
+                        if (Reader.CheckYesOrNo(message))
                             Console.WriteLine($"Mapa '{currentName}' uspješno preimenovana u '{newName}'.");
                         else 
                             Console.WriteLine("Odustali od preimenovanja mape");
@@ -163,9 +174,10 @@ namespace Internship_7_Drive.Presentation.Actions.FoldersAndFiles
                     var newName = parts[3].Trim();
 
                     var result = _fileRepository.ChangeName(currentName, newName, currentUser.Id);
+                    var message = "Jeste li sigurni da zelite promijeniti ime datoteke ('da' ili 'ne')?";
 
                     if (result == ResponseResultType.Success)
-                        if (Reader.CheckYesOrNo())
+                        if (Reader.CheckYesOrNo(message))
                             Console.WriteLine($"Datoteka '{currentName}' uspješno preimenovana u '{newName}'.");
                         else
                             Console.WriteLine("Odustali od preimenovanja datoteke");
@@ -174,7 +186,7 @@ namespace Internship_7_Drive.Presentation.Actions.FoldersAndFiles
                     else if (result == ResponseResultType.AlreadyExists)
                         Console.WriteLine($"Datoteka s imenom '{newName}' već postoji.");
                     else if (result == ResponseResultType.ValidationError)
-                        Console.WriteLine($"Nemate datoteku s imenom '{newName}'.");
+                        Console.WriteLine($"Nemate datoteku s imenom '{currentName}'.");
                 }
                 
                 else if (inputCommand.StartsWith("uredi datoteku", StringComparison.OrdinalIgnoreCase))
@@ -186,7 +198,7 @@ namespace Internship_7_Drive.Presentation.Actions.FoldersAndFiles
                 else if (inputCommand.StartsWith("komentari datoteke", StringComparison.OrdinalIgnoreCase))
                 {
                     var fileName = Writer.ReturnNewName("komentari datoteke", inputCommand);
-                    var file = _fileRepository.GetByName(fileName);
+                    var file = _fileRepository.GetByNameAndOwner(fileName, currentUser.Id);
 
                     if (file == null)
                     {
@@ -195,7 +207,7 @@ namespace Internship_7_Drive.Presentation.Actions.FoldersAndFiles
                     }
                     _commentRepository.DisplayComments(file.Id, currentUser.Id);
                 }
-
+            
             } while (inputCommand != "exit");
         }
     }

@@ -28,7 +28,7 @@ namespace Internship_7_Drive.Presentation.Actions.Users
                 Console.ReadLine();
                 return;
             }
-
+            Console.Clear();
             Console.WriteLine($"Dobrodošli, {currentUser.FirstName} {currentUser.LastName}!");
             Console.WriteLine("Što želite promijeniti?");
             Console.WriteLine("1. Email");
@@ -42,7 +42,10 @@ namespace Internship_7_Drive.Presentation.Actions.Users
                 case "1":
                     var newMail = Writer.ChangeEmail();
                     if (!Reader.ConfirmCaptcha())
+                    {
+                        Console.WriteLine("Neuspjesna promjena, krivo ste unijeli Captcha!");
                         break;
+                    }
                     var responseMail = _userRepository.UpdateMail(newMail, currentUser.Id);
 
                     if (responseMail == ResponseResultType.Success)
@@ -56,12 +59,15 @@ namespace Internship_7_Drive.Presentation.Actions.Users
                 case "2":
                     var newPassword = Writer.ChangePassword();
                     if (!Reader.ConfirmCaptcha())
+                    {
+                        Console.WriteLine("Neuspjesna promjena, krivo ste unijeli Captcha!");
                         break;
+                    }   
                     var responsePassword = _userRepository.UpdatePassword(newPassword, currentUser.Id);
 
                     if (responsePassword == ResponseResultType.Success)
                     {
-                        currentUser.Email = newPassword;
+                        currentUser.Password = newPassword;
                         Console.WriteLine("Lozinka uspješno ažurirana.");
                     }
                     else

@@ -49,7 +49,6 @@ namespace Internship_7_Drive.Domain.Repositories
                 return ResponseResultType.NotFound;
             }
             userToUpdate.Password = password;
-            Console.WriteLine("AAAA");
             SaveChanges();
             return ResponseResultType.Success;
         }

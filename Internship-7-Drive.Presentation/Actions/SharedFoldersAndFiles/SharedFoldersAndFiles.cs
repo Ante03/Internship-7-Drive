@@ -3,7 +3,6 @@ using Internship_7_Drive.Domain.Repositories;
 using Internship_7_Drive.Presentation.Abstractions;
 using Internship_7_Drive.Presentation.Extensions;
 using Internship_7_Drive.Presentation.Helpers;
-using System.Reflection;
 
 namespace Internship_7_Drive.Presentation.Actions.SharedFoldersAndFiles
 {
@@ -40,6 +39,7 @@ namespace Internship_7_Drive.Presentation.Actions.SharedFoldersAndFiles
             var inputCommand = " ";
             do
             {
+                
                 var folders = _folderRepository.GetAllFoldersByOwner(currentUser.Id);
                 var files = _fileRepository.GetAllFilesByOwner(currentUser.Id);
                 var sharedFolders = _folderSharedRepository.GetAllFoldersSharedWithUser(currentUser.Id);
@@ -60,11 +60,15 @@ namespace Internship_7_Drive.Presentation.Actions.SharedFoldersAndFiles
 
                 Console.WriteLine("\nUnesite komandu: ");
                 inputCommand = Console.ReadLine();
+                Console.Clear();
 
                 if (string.IsNullOrEmpty(inputCommand))
                     continue;
 
-                if (inputCommand.StartsWith("podijeli mapu", StringComparison.OrdinalIgnoreCase))
+                if (inputCommand.StartsWith("help", StringComparison.OrdinalIgnoreCase))
+                    Writer.WriteHelpCommandsForShare();
+
+                else if (inputCommand.StartsWith("podijeli mapu", StringComparison.OrdinalIgnoreCase))
                 {
                     var parts = inputCommand.Split("'");
                     if (parts.Length < 4)

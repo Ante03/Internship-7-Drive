@@ -22,6 +22,7 @@ namespace Internship_7_Drive.Presentation.Actions.Users
 
         public void Open()
         {
+            Console.Clear();
             var firstName = Reader.EnterName();
             var lastName = Reader.EnterSurname();
             var newMail = Writer.ChangeEmail();

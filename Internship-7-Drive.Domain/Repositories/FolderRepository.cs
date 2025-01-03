@@ -51,10 +51,16 @@ namespace Internship_7_Drive.Domain.Repositories
         public ResponseResultType ChangeName(string oldName, string newName, int userId)
         {
             var currentFolder = GetByName(oldName);
+
             if (currentFolder == null)
                 return ResponseResultType.NotFound;
+
             if (currentFolder.OwnerId != userId)
                 return ResponseResultType.ValidationError;
+
+            if (GetByName(newName) != null)
+                return ResponseResultType.AlreadyExists;
+
             currentFolder.Name = newName;
             SaveChanges();
             return ResponseResultType.Success;

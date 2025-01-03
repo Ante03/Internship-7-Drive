@@ -79,11 +79,11 @@ namespace Internship_7_Drive.Presentation.Helpers
             }
             return enteredSurname;
         }
-        public static bool CheckYesOrNo()
+        public static bool CheckYesOrNo(string message)
         {
             while (true)
             {
-                Console.WriteLine("\nJeste sigurni da zelite stvoriti novu mapu ('da' ili 'ne'):");
+                Console.WriteLine($"\n{message}");
                 var input = Console.ReadLine()?.Trim().ToLower();
 
                 if (input == "da")

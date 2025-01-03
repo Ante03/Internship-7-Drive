@@ -20,6 +20,7 @@ namespace Internship_7_Drive.Presentation.Actions.Users
 
         public void Open()
         {
+            Console.Clear();
             var newMail = Writer.EnterMail();
             var newPassword = Writer.EnterPassword();
 

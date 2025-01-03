@@ -9,17 +9,15 @@ namespace Internship_7_Drive.Domain.Repositories
         public CommentRepository(DriveDbContext dbContext) : base(dbContext) { }
 
         public void DisplayComments(int fileId, int ownerId)
-        {
-            var comments = GetAllCommentsForFile(fileId);
-            Console.WriteLine("\nKomentari za datoteku:");
-            
+        {   
             while (true)
             {
+                Console.Clear();
+                var comments = GetAllCommentsForFile(fileId);
+                Console.WriteLine("\nKomentari za datoteku:");
                 foreach (var comment in comments)
-                {
-                    Console.WriteLine($"ID: {comment.Id} | Datum: {comment.Content}");
-                    Console.WriteLine($"Sadržaj: {comment.Content}\n");
-                }
+                    Console.WriteLine($"ID: {comment.Id} | Sadrzaj: {comment.Content}");
+
                 Console.WriteLine("\nUnesite naredbu ('dodaj komentar', 'uredi komentar', 'izbriši komentar', 'exit'): ");
                 var commentCommand = Console.ReadLine();
 
@@ -31,7 +29,6 @@ namespace Internship_7_Drive.Domain.Repositories
                     Console.Write("Unesite sadržaj komentara: ");
                     var content = Console.ReadLine();
                     AddComment(fileId, ownerId, content!);
-                    Console.WriteLine("Komentar uspješno dodan.");
                 }
                 else if (commentCommand?.Equals("uredi komentar", StringComparison.OrdinalIgnoreCase) == true)
                 {
@@ -40,31 +37,22 @@ namespace Internship_7_Drive.Domain.Repositories
                     {
                         Console.Write("Unesite novi sadržaj komentara: ");
                         var newContent = Console.ReadLine();
-                        EditComment(commentId, newContent!);
-                        Console.WriteLine("Komentar uspješno uređen.");
+                        EditComment(commentId, newContent!, ownerId);
                     }
                     else
-                    {
                         Console.WriteLine("Pogrešan ID komentara.");
-                    }
+
                 }
-                else if (commentCommand?.Equals("izbriši komentar", StringComparison.OrdinalIgnoreCase) == true)
+                else if (commentCommand?.Equals("izbrisi komentar", StringComparison.OrdinalIgnoreCase) == true)
                 {
                     Console.Write("Unesite ID komentara za brisanje: ");
                     if (int.TryParse(Console.ReadLine(), out var commentId))
-                    {
-                        DeleteComment(commentId);
-                        Console.WriteLine("Komentar uspješno izbrisan.");
-                    }
+                        DeleteComment(commentId, ownerId);
                     else
-                    {
                         Console.WriteLine("Pogrešan ID komentara.");
-                    }
                 }
                 else
-                {
                     Console.WriteLine("Nepoznata naredba. Pokušajte ponovno.");
-                }
             }
         }
 
@@ -84,11 +72,14 @@ namespace Internship_7_Drive.Domain.Repositories
             return ResponseResultType.Success;
         }
 
-        public ResponseResultType EditComment(int commentId, string newContent)
+        public ResponseResultType EditComment(int commentId, string newContent, int ownerId)
         {
             var comment = DbContext.Comments.FirstOrDefault(c => c.Id == commentId);
             if (comment == null)
                 return ResponseResultType.NotFound;
+
+            if (ownerId != comment.OwnerId)
+                return ResponseResultType.ValidationError;
 
             comment.Content = newContent;
             comment.UpdatedAt = DateTimeOffset.UtcNow;
@@ -96,13 +87,16 @@ namespace Internship_7_Drive.Domain.Repositories
             return ResponseResultType.Success;
         }
 
-        public ResponseResultType DeleteComment(int commentId)
+        public ResponseResultType DeleteComment(int commentId, int ownerId)
         {
             var comment = DbContext.Comments.FirstOrDefault(c => c.Id == commentId);
             if (comment == null)
                 return ResponseResultType.NotFound;
 
-            DbContext.Comments.Remove(comment);
+            if (ownerId != comment.OwnerId)
+                return ResponseResultType.ValidationError;
+
+                DbContext.Comments.Remove(comment);
             SaveChanges();
             return ResponseResultType.Success;
         }

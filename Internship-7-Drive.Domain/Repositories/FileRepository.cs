@@ -1,6 +1,5 @@
 ﻿using Internship_7_Drive.Data.Entities;
 using Internship_7_Drive.Domain.Enums;
-using Npgsql.Internal;
 
 namespace Internship_7_Drive.Domain.Repositories
 {
@@ -38,6 +37,11 @@ namespace Internship_7_Drive.Domain.Repositories
         {
             return DbContext.Files.FirstOrDefault(f => f.Name == name);
         }
+
+        public Data.Entities.Models.File? GetByNameAndOwner(string name, int ownerID)
+        {
+            return DbContext.Files.FirstOrDefault(f => f.Name == name && f.OwnerId == ownerID);
+        }
         public ResponseResultType Delete(string name, int ownerId)
         {
             var fileToDelete = GetByName(name);
@@ -57,8 +61,11 @@ namespace Internship_7_Drive.Domain.Repositories
             if (currentFile == null)
                 return ResponseResultType.NotFound;
 
-            if(currentFile.Id != ownerId)
+            if(currentFile.OwnerId != ownerId)
                 return ResponseResultType.ValidationError;
+
+            if (GetByName(newName) != null)
+                return ResponseResultType.AlreadyExists;
 
             currentFile.Name = newName;
             SaveChanges();
